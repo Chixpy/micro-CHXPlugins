@@ -1,2 +1,2 @@
-- Added `CHXFastSearch`.
-- Added `CHXSplitLines`.
+- Adding `repo.json` of plugins.
+- Adding `0Config` with a example configuration and other files.

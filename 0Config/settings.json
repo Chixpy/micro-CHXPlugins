@@ -1,0 +1,22 @@
+{
+    "colorcolumn": 79,
+    "diffgutter": true,
+    "ft:markdown": {
+        "softwrap": true,
+        "wordwrap": true,
+    },
+    "ft:pascal": {
+        "comment.type": "// %s",
+        "rmtrailingws": true,
+    },
+    "ft:lua": {
+        "rmtrailingws": true,
+    },
+    "hltaberrors": true,
+    "hltrailingws": true,
+    "scrollbar": true,
+    "tabhighlight": true,
+    "tabmovement": true,
+    "tabsize": 2,
+    "tabstospaces": true,
+}

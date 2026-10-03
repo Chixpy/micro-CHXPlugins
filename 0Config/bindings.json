@@ -1,0 +1,8 @@
+ {
+  "Alt-l": "lua:CHXFastSearch.CHXNextWord",
+  "Alt-k": "lua:CHXFastSearch.CHXPrevWord",
+  "Alt-s": "lua:CHXSplitLines.CHXSplitLines",
+  "Alt-a": "lua:CHXSplitLines.CHXSplitLinesAt",
+  "Alt-MouseLeft": "MouseMultiCursor",
+  "Shift-MouseLeft": "MouseMultiCursor",
+}

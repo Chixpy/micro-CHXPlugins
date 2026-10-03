@@ -2,10 +2,11 @@
 *
 
 # Adding files and dirs
-!.gitignore
-!README.md
-!CHANGELOG.md
-!LastChanges.md
-
-!CHX*
-!CHX*/
+!/.gitignore
+!/README.md
+!/CHANGELOG.md
+!/LastChanges.md
+!/CHX*/
+!/CHX*/*
+!/0Config/
+!/0Config/*

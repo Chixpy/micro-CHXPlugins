@@ -1,0 +1,15 @@
+[{
+  "Name": "CHXFastSearch",
+  "Description": "Search next or previous ocurrence of current word (or selection)",
+  "Website": "https://github.com/Chixpy/micro-CHXPlugins/CHXFastSearch",
+  "Tags": ["search"],
+  "Versions": [
+    {
+      "Version": "1.0.0",
+      "Url": "",
+      "Require": {
+        "micro": ">=2.0.0"
+      }
+    }
+  ]
+}]

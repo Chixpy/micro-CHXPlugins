@@ -1,0 +1,15 @@
+[{
+  "Name": "CHXSplitLines",
+  "Description": "Split lines at colorcolumn setting or at a custom character",
+  "Website": "https://github.com/Chixpy/micro-CHXPlugins/CHXSplitLines",
+  "Tags": ["lines", "formating", "split"],
+  "Versions": [
+    {
+      "Version": "1.0.0",
+      "Url": "",
+      "Require": {
+        "micro": ">=2.0.0"
+      }
+    }
+  ]
+}]
