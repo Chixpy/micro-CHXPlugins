@@ -1,0 +1,5 @@
+## 2026-10-03 19:43
+
+- Added `CHXFastSearch`.
+- Added `CHXSplitLines`.
+
