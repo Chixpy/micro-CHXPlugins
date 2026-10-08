@@ -1,0 +1,70 @@
+# black, red, green, yellow, blue, magenta, cyan, white
+# bright-
+
+# Interface
+# ---------
+color-link default "#999999,#111111"
+
+color-link color-column "#222222"
+color-link cursor-line  "#222222"
+
+color-link gutter-error   "#ff0000"
+color-link gutter-info    "#0000ff"
+color-link gutter-warning "#ffff00"
+
+color-link diff-added     "#00ff00"
+color-link diff-deleted   "#ff0000"
+color-link diff-modified  "#ffff00"
+
+color-link tabbar      "#bbbb00,#444444"
+color-link line-number "#bbbb00,#444444"
+color-link statusline  "#bbbb00,#444444"
+color-link scrollbar   "#bbbb00,#444444"
+color-link divider     "#bbbb00,#444444"
+
+color-link tabbar.active       "bold #00ff00,#666666"
+color-link current-line-number "bold #00ff00,#666666"
+# color-link statusline.suggestions "#00ff00,#666666"
+color-link statusline.inactive "#111111,#444444"
+
+#color-link selection (defaults to inverse default)
+color-link hlsearch "#ffff00,#888888"
+
+color-link message "#ffffff,#222222"
+color-link error-message "bold #ffff00,#aa0000"
+
+color-link match-brace "bold underline"
+color-link indent-char "#333333"
+color-link tab-error "bold #ffff00,#aa0000"
+color-link trailingws "#aa0000"
+# color-link underlined
+
+# Syntax
+# ------
+color-link comment "#446666"
+color-link comment.bright "italic bold #446666"
+color-link constant "#bbbb00"
+# color-link constant.bool "#888800"
+color-link constant.bool.false "bold #bb0000"
+color-link constant.bool.true "bold #00bb00"
+color-link constant.number "#8888ff"
+color-link constant.specialChar "#bbbb00"
+color-link constant.string "#bbbbff"
+color-link constant.string.url "underline #bbbbff"
+color-link error "#550000"
+color-link identifier "bold #008800"
+# color-link identifier.class (Also used for functions)
+# color-link identifier.macro
+# color-link identifier.var
+# color-link ignore
+color-link preproc "#880000"
+# color-link preproc.shebang
+color-link special "#dddd00"
+color-link statement "#008800"
+color-link symbol "#cccccc"
+# color-link symbol.brackets "#cccccc"
+# color-link symbol.operator "#cccccc"
+# color-link symbol.tag "#cccccc"
+color-link todo "#880000"
+color-link type "#8888ff"
+color-link type.keyword "#008888"

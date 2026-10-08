@@ -10,3 +10,10 @@
 !/CHX*/*
 !/0Config/
 !/0Config/*
+
+# Modified oficial plugs
+!/jump/
+!/jump/jump.lua
+!/snippets/
+!/snippets/snippets/
+!/snippets/snippets/pascal.snippets

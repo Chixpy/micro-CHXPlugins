@@ -1,2 +1,6 @@
-- Adding `repo.json` of plugins.
-- Adding `0Config` with a example configuration and other files.
+- Added WIP of `help/symbols.md` and `help/jlsymbols.md`.
+- Added a little fix and modification of `jump` plugin.
+- Added a little modification of `quoter` plugin.
+- Added `snippets` file for Pascal language.
+- Reworked `syntax/pascal.yaml`.
+- Added an example `colorscheme/CHXdark.micro`

@@ -2,100 +2,174 @@ filetype: pascal
 
 detect:
     filename: "\\.(dpr|inc|lpr|p|pas|pp)$"
+    header: "unit|program"
+    signature: "uses|interface|{\\$H"
 
+# `//` is better than `{` `}` for line comments (Delphi/FPC).
 comment: "//"
 
 rules:
-    - type: "\\b(?i:(string|ansistring|widestring|shortstring|char|ansichar|widechar|boolean|byte|shortint|word|smallint|longword|cardinal|longint|integer|int64|single|currency|double|extended))\\b"
-    - statement: "\\b(?i:(and|asm|array|begin|break|case|const|constructor|continue|destructor|div|do|downto|else|end|file|for|function|goto|if|implementation|in|inline|interface|label|mod|not|object|of|on|operator|or|packed|procedure|program|record|repeat|resourcestring|set|shl|shr|then|to|type|unit|until|uses|var|while|with|xor))\\b"
-    - statement: "\\b(?i:(as|class|dispose|except|exit|exports|finalization|finally|inherited|initialization|is|library|new|on|out|property|raise|self|threadvar|try))\\b"
-    - statement: "\\b(?i:(absolute|abstract|alias|assembler|cdecl|cppdecl|default|export|external|forward|generic|index|local|name|nostackframe|oldfpccall|override|pascal|private|protected|public|published|read|register|reintroduce|safecall|softfloat|specialize|stdcall|virtual|write))\\b"
-    - constant: "\\b(?i:(false|true|nil))\\b"
-    - symbol.operator: "[-+*/:=<>.,@^]"
+    ###### Types
+
+    # We can try to get some types (custom included) by context.
+    # `aType1 = [type|set of]? aType2;` (but its like a var comparison...)
+    - type: "(?i)[\\w._]+\\s*=\\s*(type|set of)?\\s*[\\w._]+"
+    # `aType1 = [class|object|record|specialize] [...]`
+    - type: "(?i)[\\w._]+\\s*=\\s*(class|object|record|specialize)"
+    # `(as|is|:) aType`
+    - type: "(?i)(\\sas\\s|\\sis\\s|\\:)\\s*[\\w._]+"
+    # Class heritance `class(TType)`
+    - type: "(?i)class\\s*\\([\\w\\s._]+\\)"
+    # Specializations `TType<aType>;`
+    - type: "(?i)[\\w._]+\\s*<\\s*[\\w._]+\\s*>"
+    # ToDo:
+    #   - Castings: `TType(aVar)` wich is the same as a function call...
+
+    ###### Keywords
+    # Some keyword can have different meanings...
+
+    ### Type names:
+    #   ansistring|boolean|byte|cardinal|char|currency|extended|double|file
+    #   int64|integer|longint|longword|real|single|shortint|shortstring
+    #   string|widechar|widestring|word
+
+    ### Types
+    - statement: "(?i)\\b(array|class|generic|object|record|set)\\b"
+
+    ### Program and unit sections:
+    - identifier: "(?i)\\b(program|unit|uses|interface|implementation)\\b"
+    - identifier: "(?i)\\b(initialization|finalization)\\b"
+    - statement: "(?i)\\b(const|resourcestring|type|var)\\b"
+
+    ### Function, procedure, contructor, etc.,  and code flow:
+    - statement: "(?i)\\b(begin|break|case|constructor|continue|destructor)\\b"
+    - statement: "(?i)\\b(do|downto|else|end|except|exit|finally|for)\\b"
+    - statement: "(?i)\\b(function|goto|if|in|inherited|label|procedure|of)\\b"
+    - statement: "(?i)\\b(operator|raise|repeat|result|then|to|try|until)\\b"
+    - statement: "(?i)\\b(while|with)\\b"
+
+    ### Constants
+    # Self / Result
+    - constant: "\\b(?i)(self|result)\\b"
+    ### True / False / nil
+    - constant.bool.true: "(?i)\\b(true)\\b"
+    - constant.bool.false: "(?i)\\b(false|nil)\\b"
+
+    ### Operator keywords (put with symbols.operator later)
+    #  as|div|is|mod|not|or|shl|shr|xor
+
+    ### Other keywords:
+    - statement: "(?i)\\b(absolute|abstract|alias|assembler|cdecl|cppdecl)\\b"
+    - statement: "(?i)\\b(constref|default|dispose|exports?|external|forward)\\b"
+    - statement: "(?i)\\b(index|inline|library|local|name|new|nostackframe)\\b"
+    - statement: "(?i)\\b(oldfpccall|out|override|pascal|packed|private|)\\b"
+    - statement: "(?i)\\b(protected|property|public|published|read|register)\\b"
+    - statement: "(?i)\\b(reintroduce|safecall|softfloat|specialize)\\b"
+    - statement: "(?i)\\b(stdcall|hreadvar|virtual|write)\\b"
+
+    ### Symbols
+    - symbol: "[;.,@^]"
+
+    ## Brackets
     - symbol.brackets: "[()\\[\\]]"
+
+    ### Operators and operator keywords:
+    - symbol.operator: "((?i)[-+*/:=<>]|\\b(as|div|is|mod|not|or|shl|shr|xor)\\b)"
+
     - special:
         start: "asm"
         end: "end"
-        rules: []
     - constant.number: "\\$[0-9A-Fa-f]+"
     - constant.number: "\\b[+-]?[0-9]+([.]?[0-9]+)?(?i:e[+-]?[0-9]+)?"
-    - constant.string:
+    - constant.number:
         start: "#[0-9]{1,}"
         end: "$"
-        rules: []
-    - constant.string.char:
+    - constant.string:
+        start: "\""
+        end: "\""
+        rules:
+            - constant.specialChar: "(?i)%[\\*|0-9|:|.]*[defgmnpsux]{1}"
+    - constant.string:
         start: "'"
         end: "'"
-        skip: "\\\\."
-        rules: []
     - preproc:
         start: "{\\$"
         end: "}"
-        rules: []
     - comment:
         start: "//"
         end: "$"
+        # rules: Copiar de { }
         rules:
-            # TODO: Search better colors, they must highlight in comments
-            #   but not over code color, except "FIX" wich must blow your eyes
-            #   to change it for FIXME or FIXED.
+            #
             # "FIX" what means: ¿Is already fixed or must be fixed?
-            - underline: "\\b(?i:(FIX)):"
-            - todo: "\\b(?i:(TODO|FIXME|FIXED|HACK)):"
+            - underline: "\\b(?i)FIX\\s*:"
+            - comment.bright: "\\b(?i)(TODO|FIXME|HACK|FIXED)\\s*:"
             # Simple PasDoc
-            - todo.2: "(^|[\\s(*{\\[])(@\\w+)"
+            - comment.bright: "@\\w+"
             # "Simple" Markdown in PasDoc
             # Code, strong and italic
-            - todo.2: "(^|[\\s(*{])(`[^`\\n]+`)"
-            - underlined: "(^|[\\s(*{\\[])(__[^ ][^_]*__|\\*\\*[^ ][^*]*\\*\\*)"
-            - todo: "(^|[\\s(*{\\[])(_[^ ][^_]*_|\\*[^ ][^*]*\\*)"
-            - todo.1: "\\*([^\\*\\n]+)\\*"
-            - todo:
-                start: "(^\\s*)```"
-                end: "(^\\s*)```"
-                rules: []
+            - comment.bright: "`[^`]+`"
+            - comment.bright: "(_[^ ][^_]*_|\\*[^ ][^*]*\\*)"
+            - comment.bright: "(__[^ ][^_]*__|\\*\\*[^ ][^*]*\\*\\*)"
+            - comment.bright: "\\*([^\\*]+)\\*"
+            - comment.bright:
+                start: "```"
+                end: "```"
+                rules:
+                    # Restoring visible tabs inside code block
+                    - indent-char: "^\\s*"
+
+           # Restoring visible tabs inside comment block
+            - indent-char: "^\\s*"
     - comment:
         start: "\\(\\*"
         end: "\\*\\)"
+        # rules: Copiar de { }
         rules:
-            # TODO: Search better colors, they must highlight in comments
-            #   but not over code color, except "FIX" wich must blow your eyes
-            #   to change it for FIXME or FIXED.
+            #
             # "FIX" what means: ¿Is already fixed or must be fixed?
-            - underline: "\\b(?i:(FIX)):"
-            - todo: "\\b(?i:(TODO|FIXME|FIXED|HACK)):"
+            - underline: "\\b(?i)FIX\\s*:"
+            - comment.bright: "\\b(?i)(TODO|FIXME|HACK|FIXED)\\s*:"
             # Simple PasDoc
-            - todo.2: "(^|[\\s(*{\\[])(@\\w+)"
+            - comment.bright: "@\\w+"
             # "Simple" Markdown in PasDoc
             # Code, strong and italic
-            - todo.2: "(^|[\\s(*{])(`[^`\\n]+`)"
-            - underlined: "(^|[\\s(*{\\[])(__[^ ][^_]*__|\\*\\*[^ ][^*]*\\*\\*)"
-            - todo: "(^|[\\s(*{\\[])(_[^ ][^_]*_|\\*[^ ][^*]*\\*)"
-            - todo.1: "\\*([^\\*\\n]+)\\*"
-            - todo:
-                start: "(^\\s*)```"
-                end: "(^\\s*)```"
-                rules: []
+            - comment.bright: "`[^`]+`"
+            - comment.bright: "(_[^ ][^_]*_|\\*[^ ][^*]*\\*)"
+            - comment.bright: "(__[^ ][^_]*__|\\*\\*[^ ][^*]*\\*\\*)"
+            - comment.bright: "\\*([^\\*]+)\\*"
+            - comment.bright:
+                start: "```"
+                end: "```"
+                rules:
+                    # Restoring visible tabs inside code block
+                    - indent-char: "^\\s*"
+
+            # Restoring visible tabs inside comment block
+            - indent-char: "^\\s*"
     - comment:
         start: "{"
         end: "}"
         rules:
-            # TODO: Search better colors, they must highlight in comments
-            #   but not over code color, except "FIX" wich must blow your eyes
-            #   to change it for FIXME or FIXED.
+            #
             # "FIX" what means: ¿Is already fixed or must be fixed?
-            - underline: "\\b(?i:(FIX)):"
-            - todo: "\\b(?i:(TODO|FIXME|FIXED|HACK)):"
+            - underline: "\\b(?i)FIX\\s*:"
+            - comment.bright: "\\b(?i)(TODO|FIXME|HACK|FIXED)\\s*:"
             # Simple PasDoc
-            - todo.2: "(^|[\\s(*{\\[])(@\\w+)"
+            - comment.bright: "@\\w+"
             # "Simple" Markdown in PasDoc
             # Code, strong and italic
-            - todo.2: "(^|[\\s(*{])(`[^`\\n]+`)"
-            - underlined: "(^|[\\s(*{\\[])(__[^ ][^_]*__|\\*\\*[^ ][^*]*\\*\\*)"
-            - todo: "(^|[\\s(*{\\[])(_[^ ][^_]*_|\\*[^ ][^*]*\\*)"
-            - todo.1: "\\*([^\\*\\n]+)\\*"
-            - todo:
-                start: "(^\\s*)```"
-                end: "(^\\s*)```"
-                rules: []
+            - comment.bright: "`[^`]+`"
+            - comment.bright: "(_[^ ][^_]*_|\\*[^ ][^*]*\\*)"
+            - comment.bright: "(__[^ ][^_]*__|\\*\\*[^ ][^*]*\\*\\*)"
+            - comment.bright: "\\*([^\\*]+)\\*"
+            - comment.bright:
+                start: "```"
+                end: "```"
+                rules:
+                    # Restoring visible tabs inside code block
+                    - indent-char: "^\\s*"
+
+           # Restoring visible tabs inside comment block
+            - indent-char: "^\\s*"
 

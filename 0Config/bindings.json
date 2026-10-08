@@ -3,6 +3,12 @@
   "Alt-k": "lua:CHXFastSearch.CHXPrevWord",
   "Alt-s": "lua:CHXSplitLines.CHXSplitLines",
   "Alt-a": "lua:CHXSplitLines.CHXSplitLinesAt",
+  "Alt-w": "command:togglelocal softwrap",
+  "Alt-W": "command:togglelocal wordwrap",
+  "Alt-C": "lua:snippets.Insert",
+  "Alt-N": "lua:snippets.Next",
+  "Alt-M": "lua:snippets.Accept",
+  "Alt-X": "lua:snippets.Cancel",
   "Alt-MouseLeft": "MouseMultiCursor",
   "Shift-MouseLeft": "MouseMultiCursor",
 }

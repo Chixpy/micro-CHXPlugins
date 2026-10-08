@@ -1,0 +1,440 @@
+# Snippets for `snippets` plugin of `micro` editor
+#
+# Snippets are very verbose (with begin..end). On larger ones; if something
+# is not needed, delete it.
+#
+# I think using templates that writes sortcuts to another ones, but I
+# prefered to keep it simple.
+#
+###### File structure
+#
+# Program structure
+#
+snippet program
+	program ${1:ProgName};
+	{< Description
+	
+	  (c) ${2:Year} ${3:Autor} https://
+	}
+	{$mode ObjFPC}{$H+}{$inline ON}{$WARN 6058 OFF}
+	
+	uses
+	  ${4:SysUtils};
+	
+	const
+	
+	resourcestring
+	
+	type
+	
+	{
+	  ${1:ProgName} Main Program
+	}
+	var
+	
+	begin
+	  
+	end.
+#
+# Unit (generic)
+#
+snippet unit
+	unit u${1:UnitName};
+	{< Description
+	
+	  (c) ${2:Year} ${3:Autor} https://
+	}
+	{$mode ObjFPC}{$H+}{$inline ON}{$WARN 6058 OFF}
+	
+	interface
+	uses
+	  ${4:SysUtils};
+	
+	const
+	
+	resourcestring
+	
+	type
+	
+	implementation
+	
+	initialization
+	
+	finalization
+	
+	end.
+#
+# Unit (Class)
+#
+snippet unitc
+	unit uc${1};
+	{< Description
+	
+	  (c) ${3:Year} ${4:Autor} https://
+	}
+	{$mode ObjFPC}{$H+}{$inline ON}{$WARN 6058 OFF}
+	
+	interface
+	uses
+	  Generics.Collections;
+	
+	const
+	
+	resourcestring
+	
+	type
+	
+	{
+	  c${1}
+	}
+	
+	  c${1} = class(${2:TObject})
+	  private
+	
+	  protected
+	
+	  public
+	
+	    constructor Create;
+	    destructor Destroy; override;
+	
+	  end;
+	
+	  c${1}GenList = specialize TObjectList<c${1}>;
+	  c${1}List = class(c${1}GenList)
+	  end;
+	
+	implementation
+
+	{
+	  c${1}
+	}
+	
+	constructor c${1}.Create;
+	begin
+	  inherited Create;
+	
+	end;
+	
+	destructor c${1:ClassName}.Destroy;
+	begin
+	
+	  inherited Destroy;
+	end;
+	
+	initialization
+	
+	finalization
+	
+	end.
+#
+# Unit (Advanced Record)
+#
+snippet unitc
+	unit ut${1};
+	{< Description
+	
+	  (c) ${3:Year} ${4:Autor} https://
+	}
+	{$mode ObjFPC}{$H+}{$inline ON}{$WARN 6058 OFF}
+	{$MODESWITCH AdvancedRecords}
+	{$MODESWITCH TypeHelpers}
+	
+	interface
+	uses
+	  Generics.Collections;
+	
+	const
+	
+	resourcestring
+	
+	type
+	
+	{
+	  T${1}
+	}
+	
+	  T${1} = ${2:packed record}
+	  public
+	
+	    procedure Init;
+	  end;
+	
+	  P${1} = ^T${1};
+	
+	  c${1}GenList = specialize TList<c${1}>;
+	  c${1}List = class(c${1}GenList)
+	  end;
+	
+	implementation
+
+	{
+	  T${1}
+	}
+	
+	procedure T${1:TypeName}.Init;
+	begin
+	
+	end;
+	
+	initialization
+	
+	finalization
+	
+	end.
+#
+#
+###### Code blocks
+#
+# Case with otherwise.
+#
+snippet case
+	case ${1} of
+	  ${2:aCase1} :
+	  begin
+	    ${3}
+	  end;
+	
+	  ${4:aCase2} :
+	  begin
+	    ${5}
+	  end;
+	
+	otherwise // case ${1}
+	  ${6}
+	end; // case ${1:CaseVar}
+	
+#
+# begin..end block.
+#
+snippet begin
+	begin
+	  ${1}
+	end;
+	
+#
+# for..to
+#
+snippet for
+	for ${1} := ${2:0} to ${3:HighVal} do
+	begin
+	  aItem := aList[${1:i}];
+	  ${4}
+	end;
+	
+#
+# for..downto
+#
+snippet ford
+	for ${1} := ${2:HighVal} downto ${3:0} do
+	begin
+	  aItem := aList[${1:i}];
+	  ${4}
+	end;
+	
+#
+# for..in
+#
+snippet forin
+	for ${1:aItem} in ${2:aList} do
+	begin
+	  ${3}
+	end;
+	
+#
+# Function
+#
+snippet function
+	function ${1:FuncName}(const ${2:aArg} : ${3:TypeArg}) : ${4:TypeFunc};
+	begin
+	  ${5}
+	end;
+	
+#
+# if
+#
+snippet if
+	if (${1:aCond}) then
+	begin
+	  ${2}
+	end;
+	
+#
+# if..else
+#
+snippet iff
+	if (${1}) then
+	begin
+	  ${2}
+	end
+	else // not ${1}
+	begin
+	  ${3}
+	end; // if ${1:aCond}
+	
+#
+# if -> Exit
+#
+snippet ifx
+	if (${1:aCond}) then
+	  Exit(${1:aResult});
+	
+#
+# procedure
+#
+snippet procedure
+	procedure ${1:ProcName}(const ${2:aArg} : ${3:TypeArg});
+	begin
+	  ${4}
+	end;
+	
+#
+# repeat..until
+#
+snippet repeat
+	repeat
+	  ${2}
+	until ${1:aCond};
+	
+#
+# Create -> try..finally & Free
+#
+snippet tryc
+	${1} := ${2:ClassType}.Create;
+	try
+	  ${3}
+	finally
+	  ${1:ClassVar}.Free;
+	end;
+	
+#
+# try..except
+#
+snippet trye
+	try
+	  ${1}
+	except
+	  on E : ${2:Exception} do
+	  begin
+	    ${3}
+	  end;
+	end;
+	
+#
+# try..finally
+#
+snippet tryf
+	try
+	  ${1}
+	finally
+	  ${2}
+	end;
+	
+#
+# while
+#
+snippet while
+	while ${1:Cond} do
+	begin
+	  ${2}
+	end;
+	
+#
+# with
+#
+snippet with
+	with ${1:aVar} do
+	begin
+	  ${2}
+	end;
+	
+#
+#
+###### Type Declarations 
+#
+# Static array.
+#
+snippet arrays
+	${1:ArrName}s := Array[${2:0}..${3:High}] of ${4:Type};
+#
+# Dynamic array.
+#
+snippet array
+	${1:ArrName}s := Array of ${2:Type};
+#
+# Class
+#
+snippet class
+	c${1:ClassName} := class(${1:TObject})
+	private
+	
+	protected
+	
+	public
+	  constructor Create;
+	  destructor Destroy; override;
+	end;
+	
+#
+# Record
+#
+snippet record
+	T${1} = packed record
+	  ${2}
+	end;
+	
+	P${1:RecName} = ^T${1:RecName};
+	
+#
+# Advanced Record
+#   
+#
+snippet arecord
+	T${1} = packed record
+	public
+	  ${2}
+	
+	  procedure Init;
+	end;
+	
+	P${1:RecName} = ^T${1:RecName};
+	
+#
+# Record with variant (and advanced)
+#   
+#
+snippet vrecord
+	T${1} = packed record
+	public
+	  ${2}
+	
+    case Byte of
+      0 : (${2});
+      1 : (${3});
+	end;
+	
+	P${1:RecName} = ^T${1:RecName};
+	
+#
+#
+###### Miscellaneous Shortcuts
+#
+# Default array property of a class
+#
+snippet propd
+	property ${1}[Index : ${2:Integer}] : ${3:PropType} read Get${1} write Set${1:PropName}; default;
+#
+# Property read-only
+#
+snippet propr
+	property ${1} : ${2:PropType} read Get${1:PropName};
+#
+# Property read/write
+#
+snippet proprw
+	property ${1} : ${2:PropType} read Get${1} write Set${1:PropName};
+
+
+
+
+
