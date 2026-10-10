@@ -459,6 +459,11 @@ Plus one symbol that you are seeing in the whole document.
 
 # Todo
 
+
+## Misc not julia
+
+  🕒 💾
+
 ## Accents
 
 Teorically overwrite previous character. Don't work with copy-paste.

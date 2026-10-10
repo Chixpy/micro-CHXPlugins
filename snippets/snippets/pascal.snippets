@@ -400,13 +400,15 @@ snippet arecord
 	P${1:RecName} = ^T${1:RecName};
 	
 #
-# Record with variant (and advanced)
+# Record with variant part (and advanced)
 #   
 #
 snippet vrecord
 	T${1} = packed record
 	public
 	  ${2}
+	
+	procedure Init;
 	
     case Byte of
       0 : (${2});
@@ -433,6 +435,11 @@ snippet propr
 #
 snippet proprw
 	property ${1} : ${2:PropType} read Get${1} write Set${1:PropName};
+#
+# Property write-only
+#
+snippet proprw
+	property ${1} : ${2:PropType} write Set${1:PropName};
 
 
 

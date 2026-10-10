@@ -1,0 +1,15 @@
+[{
+  "Name": "CHXStatusExt",
+  "Description": "Miscellaneous functions to extend status info.",
+  "Website": "https://github.com/Chixpy/micro-CHXPlugins/CHXStatusExt",
+  "Tags": ["search"],
+  "Versions": [
+    {
+      "Version": "1.0.0",
+      "Url": "",
+      "Require": {
+        "micro": ">=2.0.0"
+      }
+    }
+  ]
+}]

@@ -1,14 +1,16 @@
  {
+  "Alt-w": "command:togglelocal softwrap",
+  "Alt-Shift-w": "command:togglelocal wordwrap",
+
+  "Alt-Shift-p": "lua:CHXFPCCheck.CHXFPCCheck",
+
   "Alt-l": "lua:CHXFastSearch.CHXNextWord",
   "Alt-k": "lua:CHXFastSearch.CHXPrevWord",
   "Alt-s": "lua:CHXSplitLines.CHXSplitLines",
   "Alt-a": "lua:CHXSplitLines.CHXSplitLinesAt",
-  "Alt-w": "command:togglelocal softwrap",
-  "Alt-W": "command:togglelocal wordwrap",
-  "Alt-C": "lua:snippets.Insert",
-  "Alt-N": "lua:snippets.Next",
-  "Alt-M": "lua:snippets.Accept",
-  "Alt-X": "lua:snippets.Cancel",
-  "Alt-MouseLeft": "MouseMultiCursor",
-  "Shift-MouseLeft": "MouseMultiCursor",
+
+  "Alt-Shift-c": "lua:snippets.Insert",
+  "Alt-Shift-n": "lua:snippets.Next",
+  "Alt-Shift-m": "lua:snippets.Accept",
+  "Alt-Shift-x": "lua:snippets.Cancel",
 }

@@ -14,6 +14,8 @@ rules:
     # We can try to get some types (custom included) by context.
     # `aType1 = [type|set of]? aType2;` (but its like a var comparison...)
     - type: "(?i)[\\w._]+\\s*=\\s*(type|set of)?\\s*[\\w._]+"
+    # `aType1 = (aSt1, aSt2, aSt3)`
+    - type: "(?i)[\\w._]+\\s*=\\s*\\("
     # `aType1 = [class|object|record|specialize] [...]`
     - type: "(?i)[\\w._]+\\s*=\\s*(class|object|record|specialize)"
     # `(as|is|:) aType`
@@ -63,9 +65,9 @@ rules:
     - statement: "(?i)\\b(constref|default|dispose|exports?|external|forward)\\b"
     - statement: "(?i)\\b(index|inline|library|local|name|new|nostackframe)\\b"
     - statement: "(?i)\\b(oldfpccall|out|override|pascal|packed|private|)\\b"
-    - statement: "(?i)\\b(protected|property|public|published|read|register)\\b"
-    - statement: "(?i)\\b(reintroduce|safecall|softfloat|specialize)\\b"
-    - statement: "(?i)\\b(stdcall|hreadvar|virtual|write)\\b"
+    - statement: "(?i)\\b(protected|property|public|published|read)\\b"
+    - statement: "(?i)\\b(reference|register|reintroduce|safecall|softfloat)\\b"
+    - statement: "(?i)\\b(specialize|stdcall|hreadvar|virtual|write)\\b"
 
     ### Symbols
     - symbol: "[;.,@^]"

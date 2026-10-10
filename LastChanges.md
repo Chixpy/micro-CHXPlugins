@@ -1,6 +1,2 @@
-- Added WIP of `help/symbols.md` and `help/jlsymbols.md`.
-- Added a little fix and modification of `jump` plugin.
-- Added a little modification of `quoter` plugin.
-- Added `snippets` file for Pascal language.
-- Reworked `syntax/pascal.yaml`.
-- Added an example `colorscheme/CHXdark.micro`
+- Added `CHXStatusExt`. Adds some function for status bar.
+- Fixes and modifications in other files.

@@ -1,3 +1,8 @@
+## 2026-10-10 17:24
+
+- Added `CHXStatusExt`. Adds some function for status bar.
+- Fixes and modifications in other files.
+
 ## 2026-10-08 23:54
 
 - Added WIP of `help/symbols.md` and `help/jlsymbols.md`.

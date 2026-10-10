@@ -26,8 +26,8 @@
     "scrollbar": true,
     "scrollbarchar": "┆",
     "showchars": "tab=⟩,space=,itab=┆⟩,ispace=┆",
-    "statusformatl": "┆$(lines)┆$(col)┆$(opt:encoding)┆$(opt:filetype)┆$(filename) $(modified)",
-    "statusformatr": "┆$(status.brach)$(status.mod)",
+    "statusformatl": "┆$(lines)┆$(col)┆$(opt:encoding)┆$(opt:filetype)┆$(CHXStatusExt.GitRelDir)/",
+    "statusformatr": "┆$(CHXStatusExt.FileElapTime)💾",
     "tabmovement": true,
     "tabsize": 2,
     "tabstospaces": true
