@@ -5,6 +5,14 @@ local Config = import("micro/config")
 local Buffer = import("micro/buffer")
 local Util = import("micro/util")
 
+function init()
+  Config.MakeCommand("CHXSplitLines", CHXSplitLines, Config.NoComplete)
+  Config.MakeCommand("CHXSplitLinesAt", CHXSplitLinesAt, Config.NoComplete)
+  Config.TryBindKey("Alt-s", "lua:CHXSplitLines.CHXSplitLines", false)
+  Config.TryBindKey("Alt-S", "lua:CHXSplitLines.CHXSplitLinesAt", false)
+  Config.AddRuntimeFile("CHXSplitLines", Config.RTHelp, "CHXSplitLines.md")
+end
+
 local function WrapText(text, limit)
 -- Función auxiliar para procesar un texto y envolverlo a N columnas
 -- respetando palabras.
@@ -85,7 +93,6 @@ function CHXSplitLinesAt(bp)
 -- Pide un carácter y divide la línea actual en cada coincidencia del texto.
   micro.InfoBar():Prompt("Split at char: ", "", "splitAtChar", nil,
   function (resp, canceled)
-    resp = Util.String(resp) -- Ouch...
     if canceled or resp == "" then
       return
     end
@@ -105,12 +112,4 @@ function CHXSplitLinesAt(bp)
       buf:Replace(a, b, newText)
     end
   end)
-end
-
-function init()
-  Config.MakeCommand("CHXSplitLines", CHXSplitLines, Config.NoComplete)
-  Config.MakeCommand("CHXSplitLinesAt", CHXSplitLinesAt, Config.NoComplete)
-  Config.TryBindKey("Alt-s", "lua:CHXSplitLines.CHXSplitLines", false)
-  Config.TryBindKey("Alt-Shift-s", "lua:CHXSplitLines.CHXSplitLinesAt", false)
-  Config.AddRuntimeFile("CHXSplitLines", Config.RTHelp, "CHXSplitLines.md")
 end

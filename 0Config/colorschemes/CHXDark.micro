@@ -35,8 +35,8 @@ color-link error-message "bold #ffff00,#aa0000"
 
 color-link match-brace "bold underline"
 color-link indent-char "#333333"
-color-link tab-error "bold #ffff00,#aa0000"
-color-link trailingws "#aa0000"
+color-link tab-error "#330000"
+color-link trailingws "#330000"
 # color-link underlined
 
 # Syntax

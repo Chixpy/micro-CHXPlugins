@@ -4,24 +4,26 @@
         "keepautoindent": true,
         "rmtrailingws": false,
         "tabsize": 4,
-        "tabstospaces": false
+        "tabstospaces": false,
     },
     "basename": true,
     "colorcolumn": 79,
     "colorscheme": "CHXDark",
     "diffgutter": true,
+    "divchars": "┆-",
     "ft:markdown": {
         "rmtrailingws": false,
         "softwrap": true,
-        "wordwrap": true
+        "wordwrap": true,
     },
     "ft:pascal": {
-        "comment.type": "// %s"
+        "comment.type": "// %s",
     },
     "hlsearch": true,
     "hltaberrors": true,
     "hltrailingws": true,
     "matchbracestyle": "highlight",
+    "parsecursor": true,
     "rmtrailingws": true,
     "scrollbar": true,
     "scrollbarchar": "┆",
@@ -30,5 +32,5 @@
     "statusformatr": "┆$(CHXStatusExt.FileElapTime)💾",
     "tabmovement": true,
     "tabsize": 2,
-    "tabstospaces": true
+    "tabstospaces": true,
 }
