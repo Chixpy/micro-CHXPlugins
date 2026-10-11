@@ -25,3 +25,9 @@ You can easily modify that in your `bindings.json` file by adding and changing:
     "Alt-a": "CHXSplitLines.CHXSplitLinesAt",
 }
 ```
+## Posible improvements
+
+- Keep indent and wrap text in consequence.
+- Choose bewteen hard wrap and soft wrap.
+- Rewrap al whole paragraph (or selected ones).
+- Autowrap while writing.

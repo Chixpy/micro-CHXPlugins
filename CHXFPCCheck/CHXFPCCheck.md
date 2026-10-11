@@ -99,18 +99,23 @@ As a parachute, we can add some other directories with various `-Fu` params:
 For more complex projects, previous configuration can be not enough. Units
 are across many directories.
 
-Surely, these projects will use a config file for `fpc` and we can add with their actual project configuration (unless Lazarus is used to create them...).
+Surely, these projects will use a config file for `fpc` and we can add with
+their actual project configuration (unless Lazarus is used to create them...).
 
 This file it is basically command line arguments, one per line, with some
 conditional features.
 
-It can be done with a prompt or try to search automatically.
+It can be done with a prompt or try to search automatically, and it's added
+with `@[File]` parameter.
 
 > Note 3: As previous Note 1, if used then must be updated when current file
 > changes.
 
 > Note 4: If this parameter is added and the file is not found then `fpc`
 > will return an error without trying to compile anything.
+
+> Warning Hint: ***¡¡¡Don't use `fpc.cfg` as filename!!!*** Use another
+> filename: `config.fpc`, `build.cfg` or `CowsAre.Blue`, but not `fpc.cfg`.
 
 ### What about created files?
 
@@ -124,7 +129,7 @@ will find already compiled units and it will not recompile them.
 
 1. Search a temporal directory for output and create it (`fpc` doesn't create
   directories; well, it can create only one level as much).
-2. Get source file directory (its parent is not really needed to get).
+2. Get source file directory (It's not really needed to get its parent).
 3. Optional: Get a fpc config file to add its configuration. If none is used
   don't add it's parameter.
 4. Call `linter.makeLinter`:

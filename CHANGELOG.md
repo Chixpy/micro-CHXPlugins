@@ -1,3 +1,7 @@
+## 2026-10-12 01:18
+
+- Updating `README.md`.
+
 ## 2026-10-11 23:48
 
 - Added `CHXFPCCheck` a proper check syntax for FreePascal (and a commented out
