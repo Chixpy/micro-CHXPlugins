@@ -1,3 +1,12 @@
+## 2026-10-12 23:17
+
+- Little documentation fixes.
+- `CHXFPCCheck` plugin:
+  - Use of `-s`, it generates `*.ppu` files.
+  - Jump cursor to first Error/Fatal message. Not Warning, Note or Hint.
+  - Adding a message at InfoBar when finished.
+- Renamed `CHXFPCCheck/repo.json` to lower case...
+
 ## 2026-10-12 01:18
 
 - Updating `README.md`.
@@ -34,4 +43,3 @@
 
 - Added `CHXFastSearch`.
 - Added `CHXSplitLines`.
-

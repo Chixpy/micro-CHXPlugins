@@ -21,11 +21,11 @@ Files with some additional help. Initally, I wanted to do a plugin wich added
 documents to `micro` help system, something similar to `cheat` plugin; but I
 realized that copying them directly in `help` folder is easiest.
 
-- [jlsymbols.md](0Config/help/jlsymbols.json): Cheatsheet of sorted
+- [jlsymbols.md](0Config/help/jlsymbols.md): Cheatsheet of sorted
   abbreviations of `jlabbrev` plugin. But as the plugin itself has a little
   problem with some of them and it very slow open `micro` with it, I prefer to
   use `symbols.md` to copy-paste them.
-- [symbols.md](0Config/help/symbols.json): Document with symbols with tematic
+- [symbols.md](0Config/help/symbols.md): Document with symbols with tematic
   grouping for easy copying and pasting, from `jlabbrev` plugin and other ones.
 
 ### `syntax` subdirectory
@@ -96,8 +96,8 @@ Plugin to add more available info for status bar.
 - File absolute path, even when opened as relative to current directory.
 - File directory: Absolute, as opened in micro, relative to working directory
   or relative to its git repository.
-- Time, Date, _Time of first not saved modification_ and Time elapsed without
-  saving.
+- Time, Date, _Timestamp of first not saved modification_ and Time elapsed
+  without saving.
 
 ## Modified oficial plugins
 

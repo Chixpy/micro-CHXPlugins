@@ -29,5 +29,7 @@ You can easily modify that in your `bindings.json` file by adding and changing:
 
 - Keep indent and wrap text in consequence.
 - Choose bewteen hard wrap and soft wrap.
-- Rewrap al whole paragraph (or selected ones).
-- Autowrap while writing.
+- Rewrap (join and split again) a whole paragraph (or selected ones).
+  - If we want not depend on another plugin (`joinLines`), I need to implement
+    joining lines inside of this plugin, then I can remove `joinLines`  plugin.
+- Autowrap while writing. Meh...

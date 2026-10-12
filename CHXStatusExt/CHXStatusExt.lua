@@ -4,7 +4,7 @@ local micro = import("micro")
 local Config = import("micro/config")
 local Util = import("micro/util")
 local FilePath = import("filepath")
-local OS = import("os")
+local GoOS = import("os")
 local time = import("time")
 
 local GitRootCache = {} -- Root path of git files
@@ -61,7 +61,7 @@ local function FindGitRoot(dir)
   while dir ~= "" and dir ~= FilePath.Separator do
     local GitDir = FilePath.Join(dir, ".git")
 
-    local Info, err = OS.Stat(GitDir)
+    local Info, err = GoOS.Stat(GitDir)
     if err == nil then
       return dir
     end
@@ -88,7 +88,7 @@ function GitRelDir(buf)
     RootDir = FindGitRoot(FileDir)
 
     if RootDir == nil then
-      local WDir, err = OS.Getwd()
+      local WDir, err = GoOS.Getwd()
       RootDir = (err == nil) and WDir or FileDir
     end
 
@@ -105,7 +105,6 @@ function GitRelDir(buf)
     RelPath = "."
   end
 
-
   return "[" .. GitDir .. "] " .. RelPath
 end
 
@@ -120,7 +119,7 @@ function WorkRelDir(buf)
 
   local FileDir = AbsDir(buf)
 
-  local WDir, err = OS.Getwd()
+  local WDir, err = GoOS.Getwd()
   if err ~= nil then
     return FileDir
   end

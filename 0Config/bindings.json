@@ -2,8 +2,11 @@
   // Warning:
   //   "Alt-Shift-<Key>", at least, doesn't work for me
   //   They must be: "Alt-<CapKey>" althought is less clear
+
   "Alt-w": "command:togglelocal softwrap",
   "Alt-W": "command:togglelocal wordwrap",
+
+  "Alt-z": "IndentSelection|IndentLine",
 
   "Alt-P": "lua:CHXFPCCheck.CHXFPCCheck",
 

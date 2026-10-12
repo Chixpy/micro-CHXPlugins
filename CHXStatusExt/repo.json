@@ -2,7 +2,7 @@
   "Name": "CHXStatusExt",
   "Description": "Miscellaneous functions to extend status info.",
   "Website": "https://github.com/Chixpy/micro-CHXPlugins/CHXStatusExt",
-  "Tags": ["search"],
+  "Tags": ["StatusBar", "FileInfo"],
   "Versions": [
     {
       "Version": "1.0.0",

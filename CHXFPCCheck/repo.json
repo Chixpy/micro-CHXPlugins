@@ -1,11 +1,11 @@
 [{
   "Name": "CHXFPCCheck",
   "Description": "Syntax check for Free Pascal files",
-  "Website": "https://github.com/Chixpy/Plugins-micro/CHXFPCCheck",
-  "Tags": ["Free Pascal", "Syntax Check"],
+  "Website": "https://github.com/Chixpy/micro-CHXPlugins/CHXFPCCheck",
+  "Tags": ["Free Pascal", "Syntax Check", "linter"],
   "Versions": [
     {
-      "Version": "1.0.0",
+      "Version": "1.1.0",
       "Url": "",
       "Require": {
         "micro": ">=2.0.0"

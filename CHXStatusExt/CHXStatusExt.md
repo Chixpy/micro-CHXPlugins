@@ -30,3 +30,4 @@ In `~/.config/micro/settings.json` configuration, in `statusformatl` or
 
 ## ToDo
 
+_Now empty_

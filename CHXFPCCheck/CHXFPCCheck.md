@@ -46,20 +46,21 @@ they are for current file.
 It will try to compile, generating object files `*.o`, `*.ppu` and executable
 one on compilation success.
 
-`fpc` has not a _Syntax Check_ option per se. The only near options are:
+`fpc` has not a _Syntax Check_ option _per se_. The only near options are:
 
 - `-s`: Don't assemble nor link.
-  - It creates an assembler file `[FileName].s` at source file directory.
+  - It creates an assembler file `[FileName].s` (and `[FileName].ppu`) at
+    source file directory.
   - It creates `link.res` and `ppas.sh` (in Linux) an working directory.
-  - TODO: ¿Does `fpc` create them eveytime? I think so.
+  - Not sure if source files are not changed, and it founds previous files it
+    don't recompile them.
 - `-Cn`: Assemble but skip linker.
-  - It creates `[FileName].o` (and `[FileName].ppu`) at source file directory.
-  - If source file is not changed, and founds previous files it don't recompile.
-  - TODO: ¿Will we miss some messages with this cache?
+  - It creates `[FileName].o` at source file directory.
+  - If source files are not changed, and it founds previous files it don't
+    recompile them.
 
-We can choose anyone until questions are resolved.
-
-Where the files are create is not a problem really and it's solved later.
+Seems that `-s` it's faster and generates `*.ppu` files needed to don't try to
+recompile them if not changed.
 
 ### ... it's a compilation
 
@@ -75,23 +76,24 @@ By default, units (and other files) are searched in:
 2. Current working directory.
 3. `fpc` system and package directories.
 
-If not are there we need provide `fpc` where to find them, as it is not common
-to use `Uses uUnit in '../OtherFolder/uUnit.pas';`.
+If they are not there we need provide `fpc` where to find them, as it is not
+common to use `Uses uUnit in 'OtherFolder/uUnit.pas';`.
 
 As a parachute, we can add some other directories with various `-Fu` params:
 
-- `-Fu./*`: Working directory subdiretories.
-- `-Fu./../*`: Working directory brothers.
 - `-Fu[FileDir]/*`: Source file directory subdiretories.
 - `-Fu[FileParentDir]/*` or `-Fu[FileDir]/../*`: Source file directory brothers.
+- `-Fu./*`: Working directory subdiretories.
+- `-Fu./../*`: Working directory brothers.
 
-> Note 1: If last ones are added, we need to change `linter` configuration
-> when changing current file in micro. AFAIK, this must be done removing and
-> re-addin the linter with the new configuration, because makeLinter don't
-> change a linter configuration if it's already created.
+> **Note 1**: If directories relative to source file are added, we need to
+> change `linter` configuration when changing current file in micro. AFAIK,
+> this must be done removing and re-addin the linter with the new
+> configuration, because makeLinter don't change a linter configuration if
+> it's already created.
 
-> Note 2: As `-Fu` is for units (and other files), `-Fi` is for include files
-> but usually these are in same folder along the files that call them.
+> **Note 2**: As `-Fu` is for units (and other files), `-Fi` is for include
+> files but usually these are in same folder along the files that call them.
 > If an include file is not found its directory must be added too
 
 ### Better use a config file if available
@@ -99,74 +101,77 @@ As a parachute, we can add some other directories with various `-Fu` params:
 For more complex projects, previous configuration can be not enough. Units
 are across many directories.
 
-Surely, these projects will use a config file for `fpc` and we can add with
-their actual project configuration (unless Lazarus is used to create them...).
+Surely, these projects will use a config file for `fpc` and we can add it with
+their actual project configuration (unless Lazarus is used...).
 
-This file it is basically command line arguments, one per line, with some
+This file contains command line arguments, one per line, with some
 conditional features.
 
-It can be done with a prompt or try to search automatically, and it's added
+It can be done with a prompt or try to search it automatically, and it's added
 with `@[File]` parameter.
 
-> Note 3: As previous Note 1, if used then must be updated when current file
-> changes.
+> **Note 3**: As previous Note 1, if it's used then must be updated when
+> current file changes.
 
-> Note 4: If this parameter is added and the file is not found then `fpc`
+> **Note 4**: If this parameter is added and the file is not found then `fpc`
 > will return an error without trying to compile anything.
 
-> Warning Hint: ***¡¡¡Don't use `fpc.cfg` as filename!!!*** Use another
-> filename: `config.fpc`, `build.cfg` or `CowsAre.Blue`, but not `fpc.cfg`.
+> **Warning Hint**: ***¡¡¡DON'T USE `fpc.cfg` AS FILENAME!!!*** Use another
+> filename: `config.fpc`, `build.cfg` or `CowsAre.Blue`, but not ~~`fpc.cfg`~~.
 
 ### What about created files?
 
 The easiest one, just change output dir with `-FU` (for `*.o`, `*.ppu`,
 executable and others) and `-FE` (override for executable) to a temp dir.
 
-If `-Cn` argument is used, we want to add the temporal folder with `-Fu` and it
-will find already compiled units and it will not recompile them.
+Then we want to add the temporal folder with `-Fu` and it will find already
+compiled units and it will not recompile them.
 
 ### The final config
 
 1. Search a temporal directory for output and create it (`fpc` doesn't create
   directories; well, it can create only one level as much).
 2. Get source file directory (It's not really needed to get its parent).
-3. Optional: Get a fpc config file to add its configuration. If none is used
-  don't add it's parameter.
+3. Get a fpc config file to add its configuration. If none is used don't add
+  it's parameter.
 4. Call `linter.makeLinter`:
 
 ```lua
-function UseInternalLinter([...])
+function ConfigureInternalLinter(PasFile, TmpDir, CFGFile)
 
   linter.removeLinter("fpc")
-
-  linter.makeLinter("fpc", "pascal", "fpc", -- ID, filetype, executable
-
-    {"-Cn",                  -- "-Cn" = Compile ".o" (Don't recompile unchanged)
-                             -- or "-s" = Don't Assemble (but regenate asm?)
-    "@"..CFGFile,            -- Config file, add only if one is used
+ 
+  FileDir = filepath.Dir(PasFile)
+  local Args = {
+    "-s",                    -- "-s" = Don't Assemble or "-Cn" = Compile ".o"
     "-FU"..TmpDir,           -- Temp output dir for .o .ppu
     "-FE"..TmpDir,           -- Temp output dir for executable
     "-Fu"..TmpDir,           -- Search precompiled units in output dir
     "-Fu./*",                -- Search units in working directory subdirs.
-    "-Fu./../*",             -- Search units in working directory brothers.
+    "-Fu../*",               -- Search units in working directory brothers.
     "-Fu"..FileDir.."/*",    -- Search units in souce file directory subdirs.
     "-Fu"..FileDir.."/../*", -- Search units in souce file directory brothers.
     "-v0ewnh",               -- "0" = Minimal verbosity; "e" = Error;
                              -- "w" = Warning; "n" = Note; "h" = Hint
     "-l-",                   -- Remove Name and copyright, less output lines
-    SourceFilePath},         -- Current source file path
-
-    "%f%(%l,%c%) %m"         -- Output regex
-    -- Actually FPC can generate gcc like output with "-vr"
-
-  )  -- `linter.makeLinter` Can have more parameters. See `help linter`
+    PasFile                  -- Current source file path
+  }
+ 
+  if CFGFile ~= "" then
+    table.insert(Args, 1, "@"..CFGFile) -- Config file, add only if used
+  end
+ 
+  -- `linter.makeLinter` Can have more parameters. See `help linter`
+  linter.makeLinter("fpc", "pascal", "fpc", -- ID, filetype, executable
+    Args, "%f%(%l,%c%) %m")                 -- Args, output line regex
 end
 ```
 
-> Remember: As said before, if config file or subdirectories and brothers of
-> source file directory are added then `linter` configuration must be changed
-> when current file is changed. But must be removed and then re-added. 
-> so, this function to be called at relevant events... before any Save action.
+> **Remember**: As said before, if config file or subdirectories and brothers
+> of source file directory are added then `linter` configuration must be
+> changed when current file is changed. But must be removed and then re-added.
+> so, this function needs to be called at relevant events... before any Save
+> action.
 
 ### Then, why you didn't use internal `linter`?
 
@@ -188,14 +193,16 @@ There are still some issues:
   compiling I don't think is a good idea. We can launch another compilation
   before a previous one ends, making a paradox, exploding the world and
   imploding the universe... or simply I don't like it.
+- We need to listen any current tab change and update `linter`. While with
+  this plugin it only do it on explicit call.
 - Actually, I want to extend the funcionality of this plugin as discussed in
   later chapter.
 
-_You can modify `linter` plugin..._ Shut up.
+_But, you can modify `linter` plugin..._ Shut up.
 
 ## So, How CHXFPCCheck works
 
-Well, basically it does all commented step in _Adding to default micro linter_ 
+Well, basically it does all commented steps in _Adding to default micro linter_ 
 chapter.
 
 - On Init: Search for a temp directory
@@ -206,30 +213,29 @@ chapter.
   3. Creates output dir if it doesn't exist.
   4. Retrives all other info needed.
   5. Runs `fpc`.
-  6. Parses output text
-    - Add messages to current buffer with its corresponding message type. Well
-      `fpc` has 5 types, `micro` only 3.
-    - See _Posible improvements_ chapter.
-  7. See _Posible improvements_ chapter, too.
+  6. Parses output text:
+    1. Gets all error messages and group them by file. (FPC can reference
+      previous compiled files). Assigning its type of message.
+    2. Stores first Error or Fatal message found
+    3. For every file in messages:
+      - If already opened add its messages.
+      - If not opened and has an actual Error or Fatal, open it in a new tab.
+  7. Move cursor to the file and position of the first error message.
 
 ## Posible improvements
 
 - A function to forgive an assigned config file.
-- If there are errors in other files, store the messages. Posible
-  options:
-  - If a file it's already open, add messages to its buffer.
-  - If not opened, we can choose:
-    - Open all files with errors. (May be not ones with only warning o hints).
-    - Open `fzf` menu to choose one and open it.
-    - Wait with messages until one is opened manually.
+- If a file is opened and we have messages for it, add them (Making them
+  persistent).
+- Add a mean to jump between message lines.
 - Make it configurable on verbosity without editing the plugin source.
 - Persistent fpc config files between sessions.
 - Some warnings and hints are not as useful as others, add a way to custom
   remove them individually.
-- Making an actual compile (and execute?) plugin
+- Parse `Lazarus` config files...
+- Making an actual compile (and execute?) plugin:
   - This time, we need to take care of working directory and change it to were
     config?/main? file is.
-  - Don't override output directories.
-  - `fpc` don't autocreate output directories. Need to parse config file to
-    search and create them...
-
+  - Don't override file output directories.
+  - `fpc` doesn't autocreate output directories. We need to parse config file
+    to search and create them...

@@ -1,1 +1,6 @@
-- Updating `README.md`.
+- Little documentation fixes.
+- `CHXFPCCheck` plugin:
+  - Use of `-s`, it generates `*.ppu` files.
+  - Jump cursor to first Error/Fatal message. Not Warning, Note or Hint.
+  - Adding a message at InfoBar when finished.
+- Renamed `CHXFPCCheck/repo.json` to lower case...
