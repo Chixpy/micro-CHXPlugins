@@ -1,4 +1,4 @@
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 
 local filepath = import("filepath")
 local micro = import("micro")
@@ -252,6 +252,7 @@ function FPCParseExit(output)
 
     micro.InfoBar():Message(filepath.Base(firstError.file) .. ": " .. firstError.msg)
   else
+    micro.CurPane().Buf:ClearMessages("CHXFPCCheck")
     micro.InfoBar():Message("CHXFPCCheck: Done.")
   end
 end
@@ -265,6 +266,8 @@ function CHXFPCCheck(bp)
   if not FPCcfg[bp.Buf:GetName()] then return true end -- Stop asyncronious
   FPCConfig = FPCcfg[bp.Buf:GetName()]
 
+  bp.Buf:ClearMessages("CHXFPCCheck")
+
   -- Getting File directory
   local PasDir = filepath.Abs(bp.Buf.AbsPath)
 
@@ -275,7 +278,7 @@ function CHXFPCCheck(bp)
     "-FU"..fpcCacheDir,     -- Temp output dir for .o .ppu
     "-FE"..fpcCacheDir,     -- Temp output dir for executable (can override FU)
     "-Fu"..fpcCacheDir,     -- Search precompiled units in output dir
-    "-Fu"..PasDir,          -- Search units in pascal file dir
+    -- "-Fu"..PasDir,          -- Search units in pascal file dir added by default
     "-Fu"..PasDir.."/*",    -- Search units in pascal file subdirs
     "-Fu"..PasDir.."/../*", -- Search units in pascal file brothers
     --"-Fu.",               -- Working directory is added by default

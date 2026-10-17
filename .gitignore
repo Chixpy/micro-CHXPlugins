@@ -11,9 +11,11 @@
 !/0Config/
 !/0Config/*
 
-# Modified oficial plugs
+# Modified oficial plugins
 !/jump/
 !/jump/jump.lua
 !/snippets/
 !/snippets/snippets/
 !/snippets/snippets/pascal.snippets
+!/cheat/cheatsheets/
+!/cheat/cheatsheets/org.md

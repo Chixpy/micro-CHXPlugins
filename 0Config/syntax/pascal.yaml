@@ -1,5 +1,6 @@
 filetype: pascal
 
+# TODO: Some day, change Markdown in comments to Org-Mode syntax.
 detect:
     filename: "\\.(dpr|inc|lpr|p|pas|pp)$"
     header: "unit|program"
@@ -12,36 +13,46 @@ rules:
     ###### Types
 
     # We can try to get some types (custom included) by context.
-    # `aType1 = [type|set of]? aType2;` (but its like a var comparison...)
-    - type: "(?i)[\\w._]+\\s*=\\s*(type|set of)?\\s*[\\w._]+"
-    # `aType1 = (aSt1, aSt2, aSt3)`
-    - type: "(?i)[\\w._]+\\s*=\\s*\\("
-    # `aType1 = [class|object|record|specialize] [...]`
-    - type: "(?i)[\\w._]+\\s*=\\s*(class|object|record|specialize)"
+    # # `aType1 = [type|set of|class of]? aType2;` (its like a var comparison...)
+    # - type: "(?i)[\\w._]+\\s*=\\s*(type|set\\s+of|class\\s+of)?\\s*[\\w._]+"
+    # # `aType1 = (aSt1, aSt2, aSt3)`
+    # - type: "(?i)[\\w._]+\\s*=\\s*\\("
+    # More generic rule, simple comparisons are colored anyways
+    - type: "(?i)(^|;)\\s*[\\w._]+\\s*=[\\s\\w._\\^]+"
     # `(as|is|:) aType`
     - type: "(?i)(\\sas\\s|\\sis\\s|\\:)\\s*[\\w._]+"
     # Class heritance `class(TType)`
-    - type: "(?i)class\\s*\\([\\w\\s._]+\\)"
-    # Specializations `TType<aType>;`
-    - type: "(?i)[\\w._]+\\s*<\\s*[\\w._]+\\s*>"
+    - type: "(?i)class\\s*\\([\\w\\s.,_]+\\)"
+    # Specializations / Generalizations `TType<aType>;`
+    - type: "(?i)[\\w._]+\\s*<[\\s\\w.,_]+>"
+    # Method implementations `[procedure|function|...] aType.MethodName`
+    - type: "(?i)(constructor|destructor|function|operator|procedure)\\s+[\\w._]+\\."
     # ToDo:
     #   - Castings: `TType(aVar)` wich is the same as a function call...
+    #   - aType.Create/Destroy, but 'class methods' in general...
+    #   - Constant assigments are recognized as Types.
+
+    # Restoring code blocks... (but they are nested...)
+    # - default: "(?i)(?s)\\sbegin\\s\\.+\\send\\b"
+    # Alternative case by case...
+    # `[\\:=|if|while|repeat|<AnyOperator>] aVar1 = aVar2`
 
     ###### Keywords
     # Some keyword can have different meanings...
 
-    ### Type names:
+    ### Type names: Not needed
     #   ansistring|boolean|byte|cardinal|char|currency|extended|double|file
     #   int64|integer|longint|longword|real|single|shortint|shortstring
     #   string|widechar|widestring|word
 
     ### Types
-    - statement: "(?i)\\b(array|class|generic|object|record|set)\\b"
+    ## - type: "(?i)\\b(array|class|object|record|set)\\b"
 
     ### Program and unit sections:
     - identifier: "(?i)\\b(program|unit|uses|interface|implementation)\\b"
-    - identifier: "(?i)\\b(initialization|finalization)\\b"
-    - statement: "(?i)\\b(const|resourcestring|type|var)\\b"
+    - identifier: "(?i)\\b(initialization|finalization|resourcestring)\\b"
+    # These are used more in other contexts
+    - statement: "(?i)\\b(const|type|var)\\b"
 
     ### Function, procedure, contructor, etc.,  and code flow:
     - statement: "(?i)\\b(begin|break|case|constructor|continue|destructor)\\b"
@@ -61,13 +72,14 @@ rules:
     #  as|div|is|mod|not|or|shl|shr|xor
 
     ### Other keywords:
-    - statement: "(?i)\\b(absolute|abstract|alias|assembler|cdecl|cppdecl)\\b"
-    - statement: "(?i)\\b(constref|default|dispose|exports?|external|forward)\\b"
-    - statement: "(?i)\\b(index|inline|library|local|name|new|nostackframe)\\b"
-    - statement: "(?i)\\b(oldfpccall|out|override|pascal|packed|private|)\\b"
-    - statement: "(?i)\\b(protected|property|public|published|read)\\b"
-    - statement: "(?i)\\b(reference|register|reintroduce|safecall|softfloat)\\b"
-    - statement: "(?i)\\b(specialize|stdcall|hreadvar|virtual|write)\\b"
+    - statement: "(?i)\\b(absolute|abstract|alias|assembler|at|cdecl)\\b"
+    - statement: "(?i)\\b(cppdecl|constref|default|dispose|exports?)\\b"
+    - statement: "(?i)\\b(external|forward|generic|index|inline|library)\\b"
+    - statement: "(?i)\\b(local|name|new|nostackframe|oldfpccall|out)\\b"
+    - statement: "(?i)\\b(overload|override|packed|pascal|private|protected)\\b"
+    - statement: "(?i)\\b(property|public|published|read|reference|register)\\b"
+    - statement: "(?i)\\b(reintroduce|safecall|softfloat|specialize|stdcall)\\b"
+    - statement: "(?i)\\b(virtual|write)\\b"
 
     ### Symbols
     - symbol: "[;.,@^]"
@@ -79,21 +91,21 @@ rules:
     - symbol.operator: "((?i)[-+*/:=<>]|\\b(as|div|is|mod|not|or|shl|shr|xor)\\b)"
 
     - special:
-        start: "asm"
-        end: "end"
+        start: "(?i)\\basm\\b"
+        end: "(?i)\\bend\\b"
     - constant.number: "\\$[0-9A-Fa-f]+"
     - constant.number: "\\b[+-]?[0-9]+([.]?[0-9]+)?(?i:e[+-]?[0-9]+)?"
     - constant.number:
         start: "#[0-9]{1,}"
-        end: "$"
+        end: "\\b"
     - constant.string:
         start: "\""
         end: "\""
-        rules:
-            - constant.specialChar: "(?i)%[\\*|0-9|:|.]*[defgmnpsux]{1}"
     - constant.string:
         start: "'"
         end: "'"
+        rules:
+            - constant.specialChar: "(?i)%[\\*0-9:.]*[defgmnpsux%]{1}"
     - preproc:
         start: "{\\$"
         end: "}"
@@ -102,10 +114,9 @@ rules:
         end: "$"
         # rules: Copiar de { }
         rules:
-            #
-            # "FIX" what means: ¿Is already fixed or must be fixed?
+            # What means "FIX"?: ¿Is already fixed or must be fixed?
             - underline: "\\b(?i)FIX\\s*:"
-            - comment.bright: "\\b(?i)(TODO|FIXME|HACK|FIXED)\\s*:"
+            - comment.bright: "\\b(?i)(TODO|FIX(ED|ME)|HACK)\\s*:"
             # Simple PasDoc
             - comment.bright: "@\\w+"
             # "Simple" Markdown in PasDoc
@@ -121,17 +132,16 @@ rules:
                     # Restoring visible tabs inside code block
                     - indent-char: "^\\s*"
 
-           # Restoring visible tabs inside comment block
+            # Restoring visible tabs inside comment block
             - indent-char: "^\\s*"
     - comment:
         start: "\\(\\*"
         end: "\\*\\)"
         # rules: Copiar de { }
         rules:
-            #
-            # "FIX" what means: ¿Is already fixed or must be fixed?
+            # What means "FIX"?: ¿Is already fixed or must be fixed?
             - underline: "\\b(?i)FIX\\s*:"
-            - comment.bright: "\\b(?i)(TODO|FIXME|HACK|FIXED)\\s*:"
+            - comment.bright: "\\b(?i)(TODO|FIX(ED|ME)|HACK)\\s*:"
             # Simple PasDoc
             - comment.bright: "@\\w+"
             # "Simple" Markdown in PasDoc
@@ -153,10 +163,9 @@ rules:
         start: "{"
         end: "}"
         rules:
-            #
-            # "FIX" what means: ¿Is already fixed or must be fixed?
+            # What means "FIX"?: ¿Is already fixed or must be fixed?
             - underline: "\\b(?i)FIX\\s*:"
-            - comment.bright: "\\b(?i)(TODO|FIXME|HACK|FIXED)\\s*:"
+            - comment.bright: "\\b(?i)(TODO|FIX(ED|ME)|HACK)\\s*:"
             # Simple PasDoc
             - comment.bright: "@\\w+"
             # "Simple" Markdown in PasDoc
@@ -172,6 +181,6 @@ rules:
                     # Restoring visible tabs inside code block
                     - indent-char: "^\\s*"
 
-           # Restoring visible tabs inside comment block
+            # Restoring visible tabs inside comment block
             - indent-char: "^\\s*"
 
