@@ -462,7 +462,7 @@ Plus one symbol that you are seeing in the whole document.
 
 ## Misc not julia
 
-  🕒 💾
+  🕒 💾 ✅ ❌ 📝 💡 ⚠️ ⚙️ 📦
 
 ## Accents
 
@@ -476,10 +476,10 @@ Teorically overwrite previous character. Don't work with copy-paste.
     `oturnedcomma` ̒ · `overbar` ̅ · `overleftarrow` ⃖
     `overleftrightarrow` ⃡ · `ovhook` ̉ · `palh` ̡ · `rh` ̢
     `rightharpoonaccent` ⃑ · `sbbrg` ̪ · `sout` ̶ · `strike` ̶
-    `threeunderdot` ⃨ · `underbar` ̲ · `underleftarrow` ⃮
-    `underleftharpoondown` ⃭ · `underleftrightarrow` ͍
-    `underrightarrow` ⃯ · `underrightharpoondown` ⃬ · `vec` ⃗
-    `vertoverlay` ⃒ · `widebridgeabove` ⃩ · `wideutilde` ̰
+    `thickspace`   · `thinspace`   · `threeunderdot` ⃨ · `underbar` ̲ · `tilde` ̃
+    `underleftarrow` ⃮ · `underleftharpoondown` ⃭ · `underleftrightarrow` ͍
+    `underrightarrow` ⃯ · `underrightharpoondown` ⃬ · `vec` ⃗ · `vertoverlay` ⃒ 
+    `widebridgeabove` ⃩ · `wideutilde` ̰
 
 ## Physical units
 
@@ -576,8 +576,11 @@ Teorically overwrite previous character. Don't work with copy-paste.
     `LeftUpTeeVector`   ⥠ · `RightUpTeeVector`   ⥜
     `LeftDownTeeVector` ⥡ · `RightDownTeeVector` ⥝
 
-    `barleftarrow`   ⇤ · `rightarrowbar` ⇥
+    `mapsfrom` ↤ · `mapsto` ↦
     `longmapsfrom`   ⟻ · `longmapsto`    ⟼
+    `mapsdown` ↧ · `mapsup` ↥
+
+    `barleftarrow`   ⇤ · `rightarrowbar` ⇥
     `UpArrowBar`     ⤒ · `DownArrowBar`  ⤓
     `updownarrowbar` ↨
 
@@ -646,7 +649,7 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `leftarrowbackapprox` ⭂ · `rightarrowbackapprox` ⭈
 
 
-· `Ldsh` ↲ · `Lsh` ↰ · `Rsh` ↱
+· `Lsh` ↰ · `Ldsh` ↲ · `Rsh` ↱ · `Rdsh` ↳
 
 · `Rlarr` ⥂
 
@@ -723,22 +726,117 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `nvtwoheadleftarrowtail` ⬼ · `nvtwoheadrightarrowtail` ⤗
 · `nVtwoheadleftarrowtail` ⬽ · `nVtwoheadrightarrowtail` ⤘
 
+## Comparisons
+
+### Equal / Assignement / Approximation
+
+· `Coloneq` ⩴
+· `Doteq` ≑
+· `Equal` ⩵
+· `Equiv` ≣
+· `allequal` ≌
+· `approx` ≈
+· `approxeq` ≊
+· `approxeqq` ⩰
+· `approxnotequal` ≆
+· `arceq` ≘
+· `asteq` ⩮
+· `backsim` ∽
+· `backsimeq` ⋍
+· `bumpeq` ≏
+· `bumpeqq` ⪮
+· `coloneq` ≔
+· `cong` ≅
+· `congdot` ⩭
+· `ddotseq` ⩷
+· `doteq` ≐
+· `dotequiv` ⩧
+· `eqcirc` ≖
+· `eqcolon` ≕
+· `eqdef` ≝
+· `eqdot` ⩦
+· `eqeqeq` ⩶
+· `eqqplus` ⩱
+· `eqqsim` ⩳
+· `eqsim` ≂
+· `equiv` ≡
+· `equivDD` ⩸
+
+### Less / Greater
+
+· `NestedLessLess` ⪡ · `NestedGreaterGreater` ⪢
+· `NotLessLess` ≪̸ · `NotGreaterGreater` ≫̸
+· `NotNestedLessLess` ⪡̸ · `NotNestedGreaterGreater` ⪢̸
+· `elsdot` ⪗ · `egsdot` ⪘
+· `eqless` ⋜ · `eqgtr` ⋝
+· `eqqless` ⪙ · `eqqgtr` ⪚
+· `eqqslantless` ⪛ · `eqqslantgtr` ⪜
+· `eqslantless` ⪕ · `eqslantgtr` ⪖
+· `le` ≤ · `ge` ≥
+· `leq` ≤ · `geq` ≥
+· `leqq` ≦ · `geqq` ≧
+· `leqqslant` ⫹ · `geqqslant` ⫺
+· `leqslant` ⩽ · `geqslant` ⩾
+· `lescc` ⪨ · `gescc` ⪩
+· `lesdot` ⩿ · `gesdot` ⪀
+· `lesdoto` ⪁ · `gesdoto` ⪂
+· `lesdotor` ⪃ · `gesdotol` ⪄
+· `lessapprox` ⪅
+· `lessdot` ⋖
+· `lesssim` ≲
+· `lllnest` ⫷ · `gggnest` ⫸
+· `lnapprox` ⪉ · `gnapprox` ⪊
+· `lneq` ⪇ · `gneq` ⪈
+· `lneqq` ≨ · `gneqq` ≩
+· `lnsim` ⋦
+· `ltcc` ⪦
+· `ltcir` ⩹
+· `ltquest` ⩻
+· `lvertneqq` ≨︀
+· `nleq` ≰
+· `nleqslant` ⩽̸
+· `nless` ≮
+· `nlesssim` ≴
+· `simlE` ⪟
+· `simless` ⪝
+
+### Greater
+
+ · `gg` ≫
+ · `ggg` ⋙
+
+ · `gnsim` ⋧
+ · `gsime` ⪎
+ · `gtcc` ⪧
+ · `gtcir` ⩺
+ · `gtquest` ⩼
+ · `gtrapprox` ⪆
+ · `gtrdot` ⋗
+ · `gtrsim` ≳
+ · `gvertneqq` ≩︀
+ · `lpargt` ⦠
+ · `ngeq` ≱
+ · `ngeqslant` ⩾̸
+ · `ngtr` ≯
+ · `ngtrsim` ≵
+ · `simgE` ⪠
+ · `simgtr` ⪞
+
+## Card suits
+
+· `clubsuit` ♣ · `diamondsuit` ♢ · `heartsuit` ♡ · `spadesuit` ♠
+· `varclubsuit` ♧ · `vardiamondsuit` ♦ · `varheartsuit` ♥ · `varspadesuit` ♤
 
 # Misc
 
-· `And` ⩓
+· `And` ⩓ · `Or` ⩔
 · `Bumpeq` ≎
 · `Cap` ⋒ · `Cup` ⋓
 · `Colon` ∷
-· `Coloneq` ⩴
-· `DH` Ð
-· `DJ` Đ
+· `DH` Ð · `DJ` Đ
 · `Dashv` ⫤
-· `Doteq` ≑
 · `ElOr` ⩖
 · `Elroang` ⦆
-· `Equal` ⩵
-· `Equiv` ≣
 · `Finv` Ⅎ
 · `Game` ⅁
 · `Im` ℑ
@@ -746,21 +844,12 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `Koppa` Ϟ
 · `L` Ł
 · `Lap` ⧊
-· `NestedGreaterGreater` ⪢
-· `NestedLessLess` ⪡
-· `NotGreaterGreater` ≫̸
-· `NotLessLess` ≪̸
-· `NotNestedGreaterGreater` ⪢̸
-· `NotNestedLessLess` ⪡̸
-· `NotSquareSubset` ⊏̸
-· `NotSquareSuperset` ⊐̸
-· `Or` ⩔
+· `NotSquareSubset` ⊏̸ · `NotSquareSuperset` ⊐̸
 · `Otimes` ⨷
 · `P` ¶
 · `Prec` ⪻
 · `PropertyLine` ⅊
 · `QED` ∎
-· `Rdsh` ↳
 · `Re` ℜ
 · `RightUpVectorBar` ⥔
 · `RightVectorBar` ⥓
@@ -768,83 +857,54 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `RuleDelayed` ⧴
 · `S` §
 · `Sampi` Ϡ
-· `Sqcap` ⩎
-· `Sqcup` ⩏
+· `Sqcap` ⩎ · `Sqcup` ⩏
 · `Stigma` Ϛ
-· `Subset` ⋐
+· `Subset` ⋐ · `Supset` ⋑
 · `Succ` ⪼
-· `Supset` ⋑
 · `TH` Þ
 · `Times` ⨯
-· `VDash` ⊫
-· `Vdash` ⊩
-· `Vert` ‖
-· `Vvdash` ⊪
-· `Vvert` ⦀
+· `VDash` ⊫ · `Vdash` ⊩ · `Vvdash` ⊪
+· `Vert` ‖ · `Vvert` ⦀
 · `Yup` ⅄
 · `Zbar` Ƶ
 · `accurrent` ⏦
 · `acidfree` ♾
 · `adots` ⋰
 · `aleph` ℵ
-· `allequal` ≌
 · `amalg` ⨿
-· `approx` ≈
-· `approxeq` ≊
-· `approxeqq` ⩰
-· `approxnotequal` ≆
-· `arceq` ≘
 · `ast` ∗
-· `asteq` ⩮
 · `astrosun` ☉
 · `asymp` ≍
 · `awint` ⨑
 · `backepsilon` ϶
-· `backppprime` ‷
-· `backpprime` ‶
-· `backprime` ‵
-· `backsim` ∽
-· `backsimeq` ⋍
+· `backppprime` ‷ · `backpprime` ‶ · `backprime` ‵
 · `bagmember` ⋿
-· `barcap` ⩃
-· `barcup` ⩂
-· `barvee` ⊽
-· `barwedge` ⊼
+· `barcap` ⩃ · `barcup` ⩂
+· `barvee` ⊽ · `barwedge` ⊼
 · `bbrktbrk` ⎶
 · `because` ∵
 · `benzenr` ⏣
 · `beth` ℶ
 · `between` ≬
-· `bigbot` ⟘
-· `bigcap` ⋂
+· `bigbot` ⟘ · `bigtop` ⟙
+· `bigcap` ⋂ · `bigcup` ⋃
 · `bigcirc` ○
-· `bigcup` ⋃
 · `bigcupdot` ⨃
-· `bigodot` ⨀
-· `bigoplus` ⨁
-· `bigotimes` ⨂
-· `bigslopedvee` ⩗
-· `bigslopedwedge` ⩘
-· `bigsqcap` ⨅
-· `bigsqcup` ⨆
+· `bigodot` ⨀ · `bigoplus` ⨁ · `bigotimes` ⨂
+· `bigslopedvee` ⩗ · `bigslopedwedge` ⩘
+· `bigsqcap` ⨅ · `bigsqcup` ⨆
 · `bigtimes` ⨉
-· `bigtop` ⟙
 · `biguplus` ⨄
-· `bigvee` ⋁
-· `bigwedge` ⋀
-· `blackcircledrightdot` ⚈
-· `blackcircledtwodots` ⚉
+· `bigvee` ⋁ · `bigwedge` ⋀
+· `blackcircledrightdot` ⚈ · `blackcircledtwodots` ⚉
 · `blackcircleulquadwhite` ◕
 · `blackinwhitediamond` ◈
-· `blacklefthalfcircle` ◖
+· `blacklefthalfcircle` ◖ · `blackrighthalfcircle` ◗
 · `blacklozenge` ⧫
-· `blackpointerleft` ◄
-· `blackpointerright` ►
-· `blackrighthalfcircle` ◗
+· `blackpointerleft` ◄ · `blackpointerright` ►
 · `blacksmiley` ☻
 · `blanksymbol` ␢
-· `blkhorzoval` ⬬
-· `blkvertoval` ⬮
+· `blkhorzoval` ⬬ · `blkvertoval` ⬮
 · `bot` ⊥
 · `botsemicircle` ◡
 · `bowtie` ⋈
@@ -854,8 +914,6 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `btimes` ⨲
 · `bullet` •
 · `bullseye` ◎
-· `bumpeq` ≏
-· `bumpeqq` ⪮
 · `cap` ∩
 · `capdot` ⩀
 · `capwedge` ⩄
@@ -869,8 +927,7 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `circeq` ≗
 · `circlearrowleft` ↺
 · `circlearrowright` ↻
-· `circledR` ®
-· `circledS` Ⓢ
+· `circledR` ® · `circledS` Ⓢ
 · `circledast` ⊛
 · `circledbullet` ⦿
 · `circledcirc` ⊚
@@ -881,39 +938,25 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `circledstar` ✪
 · `circledtwodots` ⚇
 · `circledwhitebullet` ⦾
-· `circlellquad` ◵
-· `circlelrquad` ◶
-· `circleonleftarrow` ⬰
-· `circleonrightarrow` ⇴
-· `circletophalfblack` ◓
-· `circleulquad` ◴
-· `circleurquad` ◷
+· `circlellquad` ◵ · `circlelrquad` ◶ · `circleulquad` ◴ · `circleurquad` ◷
+· `circleonleftarrow` ⬰ · `circleonrightarrow` ⇴
+· `circletophalfblack` ◓ · `cirfb` ◒ · `cirfl` ◐ · `cirfr` ◑
 · `circleurquadblack` ◔
 · `circlevertfill` ◍
-· `cirfb` ◒
-· `cirfl` ◐
 · `cirfnint` ⨐
-· `cirfr` ◑
 · `clockoint` ⨏
 · `clomeg` ɷ
-· `closedvarcap` ⩍
-· `closedvarcup` ⩌
+· `closedvarcap` ⩍ · `closedvarcup` ⩌
 · `closedvarcupsmashprod` ⩐
-· `clubsuit` ♣
 · `clwintegral` ∱
-· `coloneq` ≔
 · `commaminus` ⨩
 · `complement` ∁
-· `cong` ≅
-· `congdot` ⩭
 · `conictaper` ⌲
 · `conjquant` ⨇
 · `coprod` ∐
 · `copyright` ©
-· `csub` ⫏
-· `csube` ⫑
-· `csup` ⫐
-· `csupe` ⫒
+· `csub` ⫏ · `csube` ⫑
+· `csup` ⫐ · `csupe` ⫒
 · `cup` ∪
 · `cupdot` ⊍
 · `cupvee` ⩅
@@ -926,27 +969,20 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `dagger` †
 · `daleth` ℸ
 · `danger` ☡
-· `dashV` ⫣
-· `dashv` ⊣
+· `dashV` ⫣ · `dashv` ⊣
 · `ddagger` ‡
 · `ddfnc` ⦙
 · `ddots` ⋱
-· `ddotseq` ⩷
 · `defas` ⧋
 · `degree` °
 · `del` ∇
 · `dh` ð
-· `diagdown` ╲
-· `diagup` ╱
+· `diagdown` ╲ · `diagup` ╱
 · `diameter` ⌀
 · `diamond` ⋄
-· `diamondbotblack` ⬙
+· `diamondbotblack` ⬙ · `diamondleftblack` ⬖ · `diamondrightblack` ⬗ · `diamondtopblack` ⬘
 · `diamondleftarrow` ⤝
 · `diamondleftarrowbar` ⤟
-· `diamondleftblack` ⬖
-· `diamondrightblack` ⬗
-· `diamondsuit` ♢
-· `diamondtopblack` ⬘
 · `digamma` ϝ
 · `dingasterisk` ✽
 · `disin` ⋲
@@ -955,8 +991,6 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `divideontimes` ⋇
 · `dj` đ
 · `dlcorn` ⎣
-· `doteq` ≐
-· `dotequiv` ⩧
 · `dotminus` ∸
 · `dotplus` ∔
 · `dots` …
@@ -973,40 +1007,17 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `dsol` ⧶
 · `dualmap` ⧟
 · `dyogh` ʤ
-· `egsdot` ⪘
 · `eighthnote` ♪
 · `elinters` ⏧
 · `ell` ℓ
-· `elsdot` ⪗
 · `emdash` —
-· `emptyset` ∅
-· `emptysetoarr` ⦳
-· `emptysetoarrl` ⦴
-· `emptysetobar` ⦱
+· `emptyset` ∅ · `emptysetoarr` ⦳ · `emptysetoarrl` ⦴ · `emptysetobar` ⦱
 · `emptysetocirc` ⦲
 · `endash` –
 · `enspace`  
 · `eparsl` ⧣
-· `eqcirc` ≖
-· `eqcolon` ≕
-· `eqdef` ≝
-· `eqdot` ⩦
-· `eqeqeq` ⩶
-· `eqgtr` ⋝
-· `eqless` ⋜
-· `eqqgtr` ⪚
-· `eqqless` ⪙
-· `eqqplus` ⩱
-· `eqqsim` ⩳
-· `eqqslantgtr` ⪜
-· `eqqslantless` ⪛
-· `eqsim` ≂
-· `eqslantgtr` ⪖
-· `eqslantless` ⪕
 · `equalleftarrow` ⭀
 · `equalparallel` ⋕
-· `equiv` ≡
-· `equivDD` ⩸
 · `eqvparsl` ⧥
 · `esh` ʃ
 · `eth` ð
@@ -1024,51 +1035,19 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `flat` ♭
 · `fltns` ⏥
 · `forall` ∀
-· `forks` ⫝̸
-· `forksnot` ⫝
-· `forkv` ⫙
+· `forks` ⫝̸ · `forksnot` ⫝ · `forkv` ⫙
 · `fourthroot` ∜
 · `frown` ⌢
 · `fullouterjoin` ⟗
-· `ge` ≥
-· `geq` ≥
-· `geqq` ≧
-· `geqqslant` ⫺
-· `geqslant` ⩾
-· `gescc` ⪩
-· `gesdot` ⪀
-· `gesdoto` ⪂
-· `gesdotol` ⪄
-· `gesles` ⪔
-· `gg` ≫
-· `ggg` ⋙
-· `gggnest` ⫸
 · `gimel` ℷ
-· `glE` ⪒
 · `gla` ⪥
 · `glj` ⪤
 · `glst` ʔ
-· `gnapprox` ⪊
-· `gneq` ⪈
-· `gneqq` ≩
-· `gnsim` ⋧
-· `gsime` ⪎
-· `gsiml` ⪐
-· `gtcc` ⪧
-· `gtcir` ⩺
-· `gtquest` ⩼
-· `gtrapprox` ⪆
-· `gtrdot` ⋗
-· `gtreqless` ⋛
-· `gtreqqless` ⪌
+· `gesles` ⪔ · `glE` ⪒ · `gsiml` ⪐ · `gtreqless` ⋛ · `gtreqqless` ⪌
 · `gtrless` ≷
-· `gtrsim` ≳
-· `guilsinglleft` ‹
-· `guilsinglright` ›
-· `gvertneqq` ≩︀
+· `guilsinglleft` ‹ · `guilsinglright` ›
 · `hatapprox` ⩯
 · `hbar` ħ
-· `heartsuit` ♡
 · `hermaphrodite` ⚥
 · `hermitconjmatrix` ⊹
 · `hexagon` ⎔
@@ -1081,9 +1060,7 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `hslash` ℏ
 · `hspace`  
 · `hvlig` ƕ
-· `iiiint` ⨌
-· `iiint` ∭
-· `iint` ∬
+· `iiiint` ⨌ · `iiint` ∭ · `iint` ∬
 · `image` ⊷
 · `imath` ı
 · `in` ∈
@@ -1091,26 +1068,18 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `infty` ∞
 · `inglst` ʖ
 · `int` ∫
-· `intBar` ⨎
-· `intbar` ⨍
-· `intcap` ⨙
-· `intcup` ⨚
+· `intBar` ⨎ · `intbar` ⨍
+· `intcap` ⨙ · `intcup` ⨚
 · `intercal` ⊺
 · `interleave` ⫴
-· `intprod` ⨼
-· `intprodr` ⨽
+· `intprod` ⨼ · `intprodr` ⨽
 · `intx` ⨘
 · `inversewhitecircle` ◙
 · `invnot` ⌐
 · `invv` ʌ
 · `invw` ʍ
-· `invwhitelowerhalfcircle` ◛
-· `invwhiteupperhalfcircle` ◚
-· `isinE` ⋹
-· `isindot` ⋵
-· `isinobar` ⋷
-· `isins` ⋴
-· `isinvb` ⋸
+· `invwhitelowerhalfcircle` ◛ · `invwhiteupperhalfcircle` ◚
+· `isinE` ⋹ · `isindot` ⋵ · `isinobar` ⋷ · `isins` ⋴ · `isinvb` ⋸
 · `jmath` ȷ
 · `join` ⨝
 · `jupiter` ♃
@@ -1120,69 +1089,36 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `lat` ⪫
 · `late` ⪭
 · `lazysinv` ∾
-· `lceil` ⌈
+· `lceil` ⌈ · `lfloor` ⌊
 · `ldots` …
-· `le` ≤
 · `leftmoon` ☾
 · `leftouterjoin` ⟕
 · `leftthreetimes` ⋋
-· `leq` ≤
-· `leqq` ≦
-· `leqqslant` ⫹
-· `leqslant` ⩽
-· `lescc` ⪨
-· `lesdot` ⩿
-· `lesdoto` ⪁
-· `lesdotor` ⪃
-· `lesges` ⪓
-· `lessapprox` ⪅
-· `lessdot` ⋖
-· `lesseqgtr` ⋚
-· `lesseqqgtr` ⪋
-· `lessgtr` ≶
-· `lesssim` ≲
-· `lfloor` ⌊
-· `lgE` ⪑
-· `lgblkcircle` ⬤
-· `lgwhtcircle` ◯
+· `lesges` ⪓ · `lesseqgtr` ⋚ · `lesseqqgtr` ⪋ · `lessgtr` ≶ · `lgE` ⪑
+· `lgblkcircle` ⬤ · `lgwhtcircle` ◯
 · `linefeed` ↴
 · `ll` ≪
 · `llarc` ◟
 · `llbracket` ⟦
 · `llcorner` ⌞
-· `lllnest` ⫷
 · `lmoustache` ⎰
 · `lmrk` ː
-· `lnapprox` ⪉
-· `lneq` ⪇
-· `lneqq` ≨
-· `lnsim` ⋦
 · `low` ˕
 · `lowint` ⨜
 · `lozenge` ◊
-· `lpargt` ⦠
 · `lq` ‘
 · `lrarc` ◞
 · `lrcorner` ⌟
 · `lreq` ⧡
-· `lsime` ⪍
-· `lsimg` ⪏
+· `lsime` ⪍ · `lsimg` ⪏
 · `lsqhook` ⫍
-· `ltcc` ⪦
-· `ltcir` ⩹
 · `ltimes` ⋉
 · `ltlmr` ɱ
 · `ltln` ɲ
 · `ltphi` ɸ
-· `ltquest` ⩻
 · `lvboxline` ⎸
-· `lvertneqq` ≨︀
 · `male` ♂
 · `maltese` ✠
-· `mapsdown` ↧
-· `mapsfrom` ↤
-· `mapsto` ↦
-· `mapsup` ↥
 · `mars` ♂
 · `mdblkcircle` ⚫
 · `mdblkdiamond` ⬥
@@ -1227,18 +1163,10 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `neuter` ⚲
 · `nexists` ∄
 · `ng` ŋ
-· `ngeq` ≱
-· `ngeqslant` ⩾̸
-· `ngtr` ≯
-· `ngtrsim` ≵
 · `ni` ∋
 · `niobar` ⋾
 · `nis` ⋼
 · `nisd` ⋺
-· `nleq` ≰
-· `nleqslant` ⩽̸
-· `nless` ≮
-· `nlesssim` ≴
 · `nmid` ∤
 · `nni` ∌
 · `nolinebreak` ⁠
@@ -1275,32 +1203,24 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `o` ø
 · `obar` ⌽
 · `obslash` ⦸
-· `odiv` ⨸
-· `odot` ⊙
-· `odotslashdot` ⦼
+· `odiv` ⨸ · `odot` ⊙ · `odotslashdot` ⦼
 · `oe` œ
 · `ogreaterthan` ⧁
 · `ohm` Ω
-· `oiiint` ∰
-· `oiint` ∯
-· `oint` ∮
+· `oiiint` ∰ · `oiint` ∯ · `oint` ∮
 · `ointctrclockwise` ∳
 · `olessthan` ⧀
 · `ominus` ⊖
-· `openbracketleft` ⟦
-· `openbracketright` ⟧
+· `openbracketleft` ⟦ · `openbracketright` ⟧
 · `openo` ɔ
 · `oplus` ⊕
-· `opluslhrim` ⨭
-· `oplusrhrim` ⨮
-· `ordfeminine` ª
-· `ordmasculine` º
+· `opluslhrim` ⨭ · `oplusrhrim` ⨮
+· `ordfeminine` ª · `ordmasculine` º
 · `original` ⊶
 · `oslash` ⊘
 · `otimes` ⊗
 · `otimeshat` ⨶
-· `otimeslhrim` ⨴
-· `otimesrhrim` ⨵
+· `otimeslhrim` ⨴ · `otimesrhrim` ⨵
 · `overbrace` ⏞
 · `overbracket` ⎴
 · `parallel` ∥
@@ -1329,9 +1249,7 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `pm` ±
 · `pointint` ⨕
 · `postalmark` 〒
-· `pppprime` ⁗
-· `ppprime` ‴
-· `pprime` ″
+· `pppprime` ⁗ · `ppprime` ‴ · `pprime` ″
 · `prec` ≺
 · `precapprox` ⪷
 · `preccurlyeq` ≼
@@ -1395,8 +1313,7 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `rvboxline` ⎹
 · `rvbull` ◘
 · `saturn` ♄
-· `sblhr` ˓
-· `sbrhr` ˒
+· `sblhr` ˓ · `sbrhr` ˒
 · `schwa` ə
 · `scpolint` ⨓
 · `scurel` ⊱
@@ -1406,16 +1323,11 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `shuffle` ⧢
 · `sim` ∼
 · `simeq` ≃
-· `simgE` ⪠
-· `simgtr` ⪞
-· `simlE` ⪟
-· `simless` ⪝
 · `simminussim` ⩬
 · `simplus` ⨤
 · `simrdots` ⩫
 · `sinewave` ∿
-· `smallin` ∊
-· `smallni` ∍
+· `smallin` ∊ · `smallni` ∍
 · `smashtimes` ⨳
 · `smblkdiamond` ⬩
 · `smblklozenge` ⬪
@@ -1425,12 +1337,9 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `smte` ⪬
 · `smwhtcircle` ◦
 · `smwhtlozenge` ⬫
-· `spadesuit` ♠
-· `sqcap` ⊓
-· `sqcup` ⊔
-· `sqfl` ◧
+· `sqcap` ⊓ · `sqcup` ⊔
+· `sqfl` ◧ · `sqfr` ◨
 · `sqfnw` ┙
-· `sqfr` ◨
 · `sqfse` ◪
 · `sqlozenge` ⌑
 · `sqrint` ⨖
@@ -1493,10 +1402,7 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `tesh` ʧ
 · `th` þ
 · `therefore` ∴
-· `thickspace`  
-· `thinspace`  
 · `tieconcat` ⁀
-· `tilde` ̃
 · `tildelow` ˜
 · `tildetrpl` ≋
 · `times` ×
@@ -1520,8 +1426,7 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `turnediota` ℩
 · `turnednot` ⌙
 · `turnk` ʞ
-· `twocaps` ⩋
-· `twocups` ⩊
+· `twocaps` ⩋ · `twocups` ⩊
 · `twonotes` ♫
 · `u` ˘
 · `ularc` ◜
@@ -1550,10 +1455,7 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `vDash` ⊨
 · `varbarwedge` ⌅
 · `varcarriagereturn` ⏎
-· `varclubsuit` ♧
-· `vardiamondsuit` ♦
 · `vardoublebarwedge` ⌆
-· `varheartsuit` ♥
 · `varhexagon` ⬡
 · `varhexagonblack` ⬢
 · `varhexagonlrbonds` ⌬
@@ -1563,7 +1465,6 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `varnis` ⋻
 · `varnothing` ∅
 · `varointclockwise` ∲
-· `varspadesuit` ♤
 · `varsubsetneqq` ⊊︀
 · `varsupsetneq` ⊋︀
 · `varveebar` ⩡
@@ -1591,8 +1492,7 @@ Teorically overwrite previous character. Don't work with copy-paste.
 · `wedgeodot` ⩑
 · `wedgeonwedge` ⩕
 · `wedgeq` ≙
-· `whitepointerleft` ◅
-· `whitepointerright` ▻
+· `whitepointerleft` ◅ · `whitepointerright` ▻
 · `whthorzoval` ⬭
 · `whtvertoval` ⬯
 · `wp` ℘

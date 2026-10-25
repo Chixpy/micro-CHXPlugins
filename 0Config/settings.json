@@ -13,7 +13,6 @@
     "divchars": "┆-",
     "ft:markdown": {
         "rmtrailingws": false,
-        "softwrap": true,
         "wordwrap": true,
     },
     "ft:pascal": {
@@ -28,6 +27,8 @@
     "scrollbar": true,
     "scrollbarchar": "┆",
     "showchars": "tab=⟩,space=,itab=┆⟩,ispace=┆",
+    "softwrap": true,
+    "wordwrap": false,
     "statusformatl": "┆$(lines)┆$(col)┆$(opt:encoding)┆$(opt:filetype)┆$(CHXStatusExt.GitRelDir)/",
     "statusformatr": "┆$(CHXStatusExt.FileElapTime)💾",
     "tabmovement": true,

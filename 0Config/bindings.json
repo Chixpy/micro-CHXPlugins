@@ -12,8 +12,11 @@
 
   "Alt-l": "lua:CHXFastSearch.CHXNextWord",
   "Alt-k": "lua:CHXFastSearch.CHXPrevWord",
+
   "Alt-s": "lua:CHXSplitLines.CHXSplitLines",
   "Alt-a": "lua:CHXSplitLines.CHXSplitLinesAt",
+  "Alt-S": "lua:CHXSplitLines.CHXJustifyLine",
+  "Alt-J": "lua:CHXSplitLines.CHXJustifyParagraph",
 
   "Alt-C": "lua:snippets.Insert",
   "Alt-N": "lua:snippets.Next",
