@@ -1,4 +1,4 @@
-# Snippets for `snippets` plugin of `micro` editor
+# Snippets of Pascal for `snippets` plugin of `micro` editor
 #
 # Snippets are very verbose (with begin..end). On larger ones; if something
 # is not needed, delete it.
@@ -8,7 +8,7 @@
 #
 ###### File structure
 #
-# Program structure
+#### Program structure
 #
 snippet program
 	program ${1:ProgName};
@@ -35,7 +35,7 @@ snippet program
 	  ${5}
 	end.
 #
-# Unit (generic)
+#### Unit (generic)
 #
 snippet unit
 	unit u${1:UnitName};
@@ -64,7 +64,7 @@ snippet unit
 	
 	end.
 #
-# Unit (Class)
+#### Unit (Class)
 #
 snippet unitc
 	unit uc${1:ClassName};
@@ -128,7 +128,7 @@ snippet unitc
 	
 	end.
 #
-# Unit (Record)
+#### Unit (Record)
 #
 snippet unitr
 	unit ut${1:TypeName};
@@ -186,7 +186,7 @@ snippet unitr
 #
 ###### Code blocks
 #
-# Case with otherwise.
+#### Case with otherwise.
 #
 snippet case
 	case ${1:CaseVar} of
@@ -205,7 +205,7 @@ snippet case
 	end; // case ${1:CaseVar}
 	
 #
-# begin..end block.
+#### begin..end block.
 #
 snippet begin
 	begin
@@ -213,7 +213,7 @@ snippet begin
 	end;
 	
 #
-# for..to
+#### for..to
 #
 snippet for
 	for ${1:i} := ${2:0} to ${3:HighVal} do
@@ -222,7 +222,7 @@ snippet for
 	  ${4}
 	end;
 #
-# for..downto
+#### for..downto
 #
 snippet ford
 	for ${1:i} := ${2:HighVal} downto ${3:0} do
@@ -231,7 +231,7 @@ snippet ford
 	  ${4}
 	end;
 #
-# for..in
+#### for..in
 #
 snippet forin
 	for ${1:aItem} in ${2:aList} do
@@ -239,7 +239,7 @@ snippet forin
 	  ${3}
 	end;
 #
-# Function
+#### function
 #
 snippet function
 	function ${1:FuncName}(const ${2:aArg} : ${3:TypeArg}) : ${4:TypeFunc};
@@ -248,7 +248,7 @@ snippet function
 	end;
 	
 #
-# if
+#### if
 #
 snippet if
 	if (${1:aCond}) then
@@ -256,7 +256,7 @@ snippet if
 	  ${2}
 	end;
 #
-# if..else
+#### if..else
 #
 snippet iff
 	if (${1:aCond}) then
@@ -268,13 +268,13 @@ snippet iff
 	  
 	end; // if ${1:aCond}
 #
-# if -> Exit
+#### if -> Exit
 #
 snippet ifx
 	if (${1:aCond}) then
-	  Exit(${1:aResult});
+	  Exit(${2:aResult});
 #
-# procedure
+#### procedure
 #
 snippet procedure
 	procedure ${1:ProcName}(const ${2:aArg} : ${3:TypeArg});
@@ -283,14 +283,14 @@ snippet procedure
 	end;
 	
 #
-# repeat..until
+#### repeat..until
 #
 snippet repeat
 	repeat
-	  ${2}
-	until ${1:aCond};
+	  ${1}
+	until ${2:aCond};
 #
-# Create -> try..finally & Free
+#### Create -> try..finally & Free
 #
 snippet tryc
 	${1:ClassVar} := ${2:ClassType}.Create;
@@ -300,7 +300,7 @@ snippet tryc
 	  ${1:ClassVar}.Free;
 	end;
 #
-# try..except
+#### try..except
 #
 snippet trye
 	try
@@ -312,7 +312,7 @@ snippet trye
 	  end;
 	end;
 #
-# try..finally
+#### try..finally
 #
 snippet tryf
 	try
@@ -321,7 +321,7 @@ snippet tryf
 	  ${2}
 	end;
 #
-# while
+#### while
 #
 snippet while
 	while ${1:Cond} do
@@ -329,7 +329,7 @@ snippet while
 	  ${2}
 	end;
 #
-# with
+#### with
 #
 snippet with
 	with ${1:aVar} do
@@ -340,17 +340,17 @@ snippet with
 #
 ###### Type Declarations 
 #
-# Static array.
+#### Static array.
 #
 snippet arrays
 	${1:ArrName}s = Array[${2:0}..${3:High}] of ${4:Type};
 #
-# Dynamic array.
+#### Dynamic array.
 #
 snippet array
 	${1:ArrName}s = Array of ${2:Type};
 #
-# Class
+#### Class
 #
 snippet class
 	c${1:ClassName} = class(${1:tObject})
@@ -364,7 +364,7 @@ snippet class
 	end;
 	
 #
-# Record
+#### Record
 #
 snippet record
 	t${1:RecName} = ${2:packed} record
@@ -374,8 +374,7 @@ snippet record
 	p${1:RecName} = ^t${1:RecName};
 	
 #
-# Advanced Record
-#   
+#### Advanced Record
 #
 snippet arecord
 	t${1:RecName} = ${2:packed} record
@@ -388,8 +387,7 @@ snippet arecord
 	p${1:RecName} = ^t${1:RecName};
 	
 #
-# Record with variant part (and advanced)
-#
+#### Record with variant part (and advanced)
 #
 snippet vrecord
 	t${1:RecName} = ${2:packed} record
@@ -408,22 +406,22 @@ snippet vrecord
 #
 ###### Miscellaneous Shortcuts
 #
-# Default array property of a class
+#### Default array property of a class
 #
 snippet propd
 	property ${1:PropName}[Index : ${2:Integer}] : ${3:PropType} read Get${1:PropName} write Set${1:PropName}; default;
 #
-# Property read-only
+#### Property read-only
 #
 snippet propr
 	property ${1:PropName} : ${2:PropType} read Get${1:PropName};
 #
-# Property read/write
+#### Property read/write
 #
 snippet proprw
 	property ${1:PropName} : ${2:PropType} read F${1:PropName} write Set${1:PropName};
 #
-# Property write-only
+#### Property write-only
 #
 snippet propw
 	property ${1:PropName} : ${2:PropType} write Set${1:PropName};

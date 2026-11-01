@@ -6,13 +6,33 @@ local Buffer = import("micro/buffer")
 local Util = import("micro/util")
 
 function init()
-  Config.MakeCommand("CHXSplitLines", CHXSplitLines, Config.NoComplete)
-  Config.MakeCommand("CHXSplitLinesAt", CHXSplitLinesAt, Config.NoComplete)
   Config.TryBindKey("Alt-s", "lua:CHXSplitLines.CHXSplitLines", false)
+  Config.MakeCommand("CHXSplitLines", CHXSplitLines, Config.NoComplete)
+
   Config.TryBindKey("Alt-a", "lua:CHXSplitLines.CHXSplitLinesAt", false)
+  Config.MakeCommand("CHXSplitLinesAt", CHXSplitLinesAt, Config.NoComplete)
+
   Config.TryBindKey("Alt-S", "lua:CHXSplitLines.CHXJustifyLine", false)
+  Config.MakeCommand("CHXJustifyLine", CHXJustifyLine, Config.NoComplete)
+
   Config.TryBindKey("Alt-J", "lua:CHXSplitLines.CHXJustifyParagraph", false)
+  Config.MakeCommand("CHXJustifyParagraph", CHXJustifyParagraph,
+    Config.NoComplete)
+
+  -- "\x1b " = Alt-Space in my terminal
+  Config.TryBindKey("\x1b ", "lua:CHXSplitLines.CHXNBSP", false)
+  Config.MakeCommand("CHXNBSP", CHXNBSP, Config.NoComplete)
+
   Config.AddRuntimeFile("CHXSplitLines", Config.RTHelp, "CHXSplitLines.md")
+end
+
+local function DIV(a, b)
+  return (a - a % b) / b
+end
+
+local function ROUND(num)
+  if num >= 0 then return math.floor(num + 0.5)
+  else return math.ceil(num - 0.5) end
 end
 
 local function UTF8ToRunes(str)
@@ -29,7 +49,7 @@ local function WrapText(oldText, limit)
 
   for textLine in string.gmatch(oldText .. "\n", "(.-)\r?\n") do
     -- Get initial indentation and actual right limit
-    local indent, content = textLine:match("^([ \t]*)(.*)$")
+    local indent, content = textLine:match("^(%s*)(.*)$")
     local indentRunes = UTF8ToRunes(indent)
     local indentLen = #indentRunes
     local actualLimit = limit - indentLen
@@ -110,7 +130,7 @@ local function JustParagraph(oldParagraph, limit, jSingleLine)
       -- Last line kept as is.
       table.insert(justifiedLines, line)
     else
-      local indent, content = line:match("^([ \t]*)(%S.*)$")
+      local indent, content = line:match("^(%s*)(.*)$")
       if not content then
         -- Empty line... must not happen but keep as is
         table.insert(justifiedLines, line)
@@ -127,20 +147,24 @@ local function JustParagraph(oldParagraph, limit, jSingleLine)
           end
 
           local numGaps = #words - 1
-          local baseLen = Util.CharacterCountInString(indent)
-            + wordsLen + numGaps
+          local baseLen = Util.CharacterCountInString(indent) + wordsLen
           local extraSpaces = limit - baseLen
 
           if extraSpaces <= 0 then
             table.insert(justifiedLines, line)
           else
+
             -- Actual spaces betweem words
             local spacesPerGap = {}
-            for i = 1, numGaps do spacesPerGap[i] = 1 end
+            for i = 1, numGaps do
+              spacesPerGap[i] = DIV(extraSpaces, numGaps)
+            end
+            extraSpaces = extraSpaces % numGaps
 
             -- Distributing extra spaces
+            local offset = numGaps / extraSpaces
             for i = 1, extraSpaces do
-              local gapIndex = ((i - 1) % numGaps) + 1
+              local gapIndex = ROUND(i * offset)
               spacesPerGap[gapIndex] = spacesPerGap[gapIndex] + 1
             end
 
@@ -160,6 +184,12 @@ local function JustParagraph(oldParagraph, limit, jSingleLine)
   end
 
   return table.concat(justifiedLines, "\n")
+end
+
+function CHXNBSP(bp)
+  -- I don't know how to dereference bp.Cursor.Loc
+  -- bp.Buf:Insert(bp.Cursor.Loc, "\xC2\xA0")
+  bp.Buf:Insert(Buffer.Loc(bp.Cursor.X, bp.Cursor.Y), Util.RuneStr(0x00A0))
 end
 
 function CHXSplitLines(bp)
@@ -183,7 +213,7 @@ function CHXSplitLines(bp)
     -- Processing lines in inverted orded (original line numbers don't change)
     for lineNum = endLine, startLine, -1 do
       local oldText = buf:Line(lineNum)
-      local indent, newText = oldText:match("^([ \t]*)(.*)$")
+      local indent, newText = oldText:match("^(%s*)(.*)$")
       -- Removing repeated whitespaces in content only
       newText = indent .. string.gsub(newText, "%s+", " ")
 
@@ -227,7 +257,7 @@ function CHXSplitLinesAt(bp)
 
     local newText = Util.String(c:GetSelection())
     newText = string.gsub(newText, escResp, resp .. "\n")
-    newText = string.gsub(newText, "[ %t]*\n[ %t]*", "\n")
+    newText = string.gsub(newText, "^%s+\n", "\n")
 
     buf:Replace(textStart, textEnd, newText)
     c:ResetSelection()
@@ -255,7 +285,7 @@ function CHXJustifyLine(bp)
     oldText = buf:Line(endLine)
 
     -- Getting indent
-    local indent, newText = oldText:match("^([ \t]*)(.*)$")
+    local indent, newText = oldText:match("^(%s*)(.*)$")
     -- Removing repeated whitespaces in content only
     newText = indent .. string.gsub(newText, "%s+", " ")
     newText = JustParagraph(newText, limit, true)
@@ -316,7 +346,7 @@ function CHXJustifyParagraph(bp)
     end
 
     -- Getting indent
-    local indent, newText = oldParagraph:match("^([ \t]*)(.*)$")
+    local indent, newText = oldParagraph:match("^(%s*)(.*)$")
     -- Removing repeated whitespaces in content only
     newText = indent .. string.gsub(newText, "%s+", " ")
     newText = JustParagraph(newText, limit, false)

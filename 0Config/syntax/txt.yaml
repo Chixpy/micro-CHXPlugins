@@ -1,0 +1,38 @@
+filetype: CHXText
+
+detect:
+    filename: "\\.txt$"
+    signature: "== == == == =="
+
+comment: "//"
+
+# TODO: Poner muchos en una línea cuando consiga hacer que sean multilínea
+
+rules:
+    # Titles
+    - identifier: "^(==[  ]){1,6}.*$"
+    # Additional data: Links, footnotes text, language, etc.
+    - comment: "(?s)\\{\\{.*\\}\\}"
+    # Italic
+    - italic: "(?smi)//.*//"
+    # Underline
+    - underline: "(?s)__.*__"
+    # Strike
+    - underline: "(?s)~~.*~~"
+    # Bold
+    - bold: "(?s)\\*\\*.*\\*\\*"
+    # Code
+    - special: "(?s)``.*``"
+    # Definition list: Term
+    # Keep definition with default color
+    - statement: "^\\s*::.*$"
+    # Footnote anchor
+    - symbol: "\\^"
+    # Special brackets "[[ | ]] | {{ | }}" and Break line "\\"
+    - symbol.brackets: "(\\[\\[|\\]\\]|\\{\\{|\\}\\}|\\\\\\\\\\s*$)"
+    # Block
+    - statement:
+        start: "<<"
+        end: ">>"
+    # Non breaking space, this space is 0xA0 not the normal 0x20
+    - underlined: " "

@@ -1,4 +1,12 @@
 {
+    // Templates of CHXTemplates
+    "Templates/*.lua": {
+        "hltaberrors": false,
+        "keepautoindent": true,
+        "rmtrailingws": false,
+        "tabsize": 4,
+        "tabstospaces": false,
+    },
     "*.snippets": {
         "hltaberrors": false,
         "keepautoindent": true,

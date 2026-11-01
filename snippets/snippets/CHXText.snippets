@@ -1,0 +1,99 @@
+# Snippets of CHX text style for `snippets` plugin of `micro` editor
+#
+# Many snippets use non-breakings espaces
+# 
+###### Headers
+#
+# Six depths as HTML, but inverted representation from other LML
+# Closing "==" are optional
+#
+snippet h1
+	== == == == == == ${1:H1 Title} == == == == == ==
+	
+snippet h2
+	== == == == == ${1:H2 Title} == == == == ==
+	
+snippet h3
+	== == == == ${1:H3 Title} == == == ==
+	
+snippet h4
+	== == == ${1:H4 Title} == == ==
+	
+snippet h5
+	== == ${1:H5 Title} ==  ==
+	
+snippet h6
+	== ${1:H6 Title} ==
+	
+#
+###### Lists
+#
+#### Unordered list
+#
+snippet ul
+	- ${1:Item}
+	  - ${2:SubItem}
+#
+#### Ordered list
+#
+snippet ol
+	# ${1:Item}
+	  # ${2:SubItem}
+#
+#### Definition list
+#
+snippet dl
+	:: ${1:Item}
+	:= ${2:Definition}
+# 
+# 
+###### Inline styles
+#
+# Teorically they can span they can span across various lines of the paragraph.
+#
+#### Bold
+#
+snippet b
+	**${1:Bold}**
+#
+#### Italic
+#
+snippet i
+	//${1:Italic}//
+#
+#### Underline
+#
+snippet u
+	__${1:Underline}__
+#
+#### Striked
+#
+snippet s
+	~~${1:Striked}~~
+#
+#### Monospaced
+#
+snippet m
+	||${1:Monospaced}||
+#
+#### Code
+#
+snippet c
+	``${1:Code}``
+###### Block tiypes
+#
+#### Code Block
+#
+snippet cb
+	``{{${1:Language}}}
+	${2:Code}
+	``
+	
+#
+#### Block quote
+#
+snippet bq
+	<<{{${1:Kind}}}
+	${2:Text}
+	>>
+	

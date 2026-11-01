@@ -9,7 +9,7 @@ local buffer = import("micro/buffer")
 local fpcCacheDir = ""
 local FPCcfg = {}
 
-local DebugLog = true
+local DebugLog = false
 
 function init()
   for _, EnvVar in ipairs({"TMPDIR", "TMP", "HOME"})  do
@@ -278,7 +278,7 @@ function CHXFPCCheck(bp)
     "-FU"..fpcCacheDir,     -- Temp output dir for .o .ppu
     "-FE"..fpcCacheDir,     -- Temp output dir for executable (can override FU)
     "-Fu"..fpcCacheDir,     -- Search precompiled units in output dir
-    -- "-Fu"..PasDir,          -- Search units in pascal file dir added by default
+    -- "-Fu"..PasDir,       -- Search units in pascal file dir added by default
     "-Fu"..PasDir.."/*",    -- Search units in pascal file subdirs
     "-Fu"..PasDir.."/../*", -- Search units in pascal file brothers
     --"-Fu.",               -- Working directory is added by default

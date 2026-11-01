@@ -1,0 +1,15 @@
+[{
+  "Name": "CHXTemplates",
+  "Description": "Plugin to insert code templates",
+  "Website": "https://github.com/Chixpy/micro-CHXPlugins/CHXTemplates",
+  "Tags": ["code", "template"],
+  "Versions": [
+    {
+      "Version": "1.0.0",
+      "Url": "",
+      "Require": {
+        "micro": ">=2.0.0"
+      }
+    }
+  ]
+}]

@@ -27,8 +27,8 @@ color-link current-line-number "bold #00ff00,#666666"
 # color-link statusline.suggestions "#00ff00,#666666"
 color-link statusline.inactive "#111111,#444444"
 
-#color-link selection (defaults to inverse default)
-color-link hlsearch "#ffff00,#888888"
+color-link selection "#ffff00,#888888"
+color-link hlsearch ",#222222"
 
 color-link message "#ffffff,#222222"
 color-link error-message "bold #ffff00,#aa0000"
@@ -68,3 +68,8 @@ color-link symbol "#cccccc"
 color-link todo "#880000"
 color-link type "#8888dd"
 color-link type.keyword "#008888"
+
+## Custom styles
+color-link italic "italic"
+color-link underline "underline"
+color-link bold "bold"

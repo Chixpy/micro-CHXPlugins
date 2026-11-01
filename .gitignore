@@ -17,6 +17,10 @@
 !/snippets/
 !/snippets/snippets/
 !/snippets/snippets/pascal.snippets
+!/snippets/snippets/CHXText.snippets
 !/cheat/cheatsheets/
+!/cheat/cheatsheets/default.md
 !/cheat/cheatsheets/org.md
 !/cheat/cheatsheets/pascal.md
+!/quoter/
+!/quoter/quoter.lua

@@ -28,8 +28,8 @@ rules:
     # Method implementations `[procedure|function|...] aType.MethodName`
     - type: "(?i)(constructor|destructor|function|operator|procedure)\\s+[\\w._]+\\."
     # ToDo:
-    #   - Castings: `TType(aVar)` wich is the same as a function call...
-    #   - aType.Create/Destroy, but 'class methods' in general...
+    #   - Castings: `TType(aVar)` wich is the same format as a function call...
+    #   - aType.Create/Destroy, and all 'class methods' in general...
     #   - Constant assigments are recognized as Types.
 
     # Restoring code blocks... (but they are nested...)
@@ -116,7 +116,7 @@ rules:
         rules:
             # What means "FIX"?: ¿Is already fixed or must be fixed?
             - underline: "\\b(?i)FIX\\s*:"
-            - comment.bright: "\\b(?i)(TODO|FIX(ED|ME)|HACK)\\s*:"
+            - todo: "\\b(?i)(TODO|FIX(ED|ME)|HACK)\\s*:"
             # Simple PasDoc
             - comment.bright: "@\\w+"
             # "Simple" Markdown in PasDoc
@@ -141,7 +141,7 @@ rules:
         rules:
             # What means "FIX"?: ¿Is already fixed or must be fixed?
             - underline: "\\b(?i)FIX\\s*:"
-            - comment.bright: "\\b(?i)(TODO|FIX(ED|ME)|HACK)\\s*:"
+            - todo: "\\b(?i)(TODO|FIX(ED|ME)|HACK)\\s*:"
             # Simple PasDoc
             - comment.bright: "@\\w+"
             # "Simple" Markdown in PasDoc
@@ -165,7 +165,7 @@ rules:
         rules:
             # What means "FIX"?: ¿Is already fixed or must be fixed?
             - underline: "\\b(?i)FIX\\s*:"
-            - comment.bright: "\\b(?i)(TODO|FIX(ED|ME)|HACK)\\s*:"
+            - todo: "\\b(?i)(TODO|FIX(ED|ME)|HACK)\\s*:"
             # Simple PasDoc
             - comment.bright: "@\\w+"
             # "Simple" Markdown in PasDoc

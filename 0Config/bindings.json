@@ -17,9 +17,9 @@
   "Alt-a": "lua:CHXSplitLines.CHXSplitLinesAt",
   "Alt-S": "lua:CHXSplitLines.CHXJustifyLine",
   "Alt-J": "lua:CHXSplitLines.CHXJustifyParagraph",
+  // "\x1b " = Alt-Space in my terminal
+  "\x1b ": "lua:CHXSplitLines.CHXNBSP",
 
-  "Alt-C": "lua:snippets.Insert",
-  "Alt-N": "lua:snippets.Next",
-  "Alt-M": "lua:snippets.Accept",
-  "Alt-X": "lua:snippets.Cancel",
+  "Alt-C": "lua:CHXTemplates.CHXInsTemp",
+  "Alt-N": "lua:CHXTemplates.CHXNextPH",
 }
