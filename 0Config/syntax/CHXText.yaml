@@ -1,0 +1,89 @@
+filetype: CHXText
+
+detect:
+    filename: "\\.txt$"
+    signature: "(== == == ==|========)"
+
+comment: "{{%s}}"
+
+# TODO: Estaría bien poder acumular los estilos en línea y hacerlos multilinea.
+
+rules:
+  # Blocks
+
+    # Tecnically both code can be used inline and as a block
+    # Code: Prefered as block
+    - special:
+        start: "``"
+        end: "``"
+        rules:
+            # &nbsp; visible
+            - underlined: " "
+            # Additional data: Links, footnotes text, language, etc.
+            - comment: "(?smi)\\{\\{.*\\}\\}"
+    # Code: Prefered inline
+    - special:
+        start: "\\[\\["
+        end: "\\]\\]"
+        rules:
+            - underlined: " "
+            # &nbsp; visible
+            - underlined: " "
+            # Additional data: Links, footnotes text, language, etc.
+            - comment: "(?smi)\\{\\{.*\\}\\}"
+    # Matematical operation
+    - type:
+        start: "\\$\\$"
+        end: "\\$\\$"
+        rules:
+            - underlined: " "
+    # Headers
+    # TODO: Handle 3 lines header better
+    - identifier:
+        start: "^[  \\t]*=="
+        end: "^[ \\t]*$" # &nbsp; can be used to insert "empty" lines
+        rules:
+            - underlined: " "
+
+    # Definition list: Term
+    # Keep definition with default color
+    - statement:
+        start: "^[  \\t]*::"
+        end: "$"
+        rules:
+            - underlined: " "
+
+    # Block quote (we want default styles inside it)
+    # - statement:
+    #     start: "^[ \\s]*(?:<<|>>)"
+    #     end: "$"
+    - statement: "(?smi)^\\s*(<<|>>).*$"
+
+  # Inline
+
+    # Additional data: Links, footnotes text, language, etc.
+    - comment: "(?smi)\\{\\{.*\\}\\}"
+
+    # Strike
+    - underline: "(?smi)~~.*~~"
+    # Underline
+    - underline: "(?smi)__.*__"
+    # Italic
+    - italic: "(?smi)//.*//"
+    # Bold
+    - bold: "(?smi)\\*\\*.*\\*\\*"
+
+    # Todo
+    # What means "FIX"?: ¿Is already fixed or must be fixed?
+    - underline: "\\b(?i)FIX\\s*:"
+    - todo: "\\b(?i)(TODO|FIX(ED|ME)|HACK)\\s*:"
+
+  # Symbols
+
+    # Footnote anchor
+    - symbol: "\\^"
+    # Making visible not break space
+    # This space is 0xA0 not the normal 0x20
+    - underlined: " "
+    # Special brackets "[[ | ]] | {{ | }}" and Break line "\\"
+    - symbol.brackets: "(\\[\\[|\\]\\]|\\{\\{|\\}\\}|\\\\\\\\\\s*$)"

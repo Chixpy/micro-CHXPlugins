@@ -320,7 +320,8 @@ function CHXListTemplates(bp)
   if not templates then return true end
 
   local lines = {}
-  table.insert(lines, "======== Templates for: " .. filetype .. " ========")
+  table.insert(lines,
+    "== == == == == Templates for: " .. filetype .. " == == == == ==")
 --  table.insert(lines, "")
 
   -- Getting biggest key size
@@ -337,14 +338,15 @@ function CHXListTemplates(bp)
   for k, v in pairs(templates) do
     if (not v) or (v == "") then
         table.insert(lines, "")
-        table.insert(lines, "---- " .. k .. " ----")
---        table.insert(lines, "")
+        table.insert(lines, "== == == == " .. k .. " == == == ==")
+        table.insert(lines, "")
     else
-      local firstLine = v:gsub("%s+", " ")
-      firstLine = firstLine:gsub("{{(%d+)[^}]*}}", "$%1")
-      firstLine = string.format("%-" .. longestKey .."s-> %s", k, firstLine)
-      firstLine = string.sub(firstLine, 1, bp:GetView().Width)
-      table.insert(lines, firstLine)
+      local aLine = v:gsub("%s+", " ")
+      aLine = aLine:gsub("{{(%d+)[^}]*}}", "$%1")
+      aLine = string.format("  %-" .. longestKey .."s -> %s", k, aLine)
+      -- aLine = string.format(":: " .. k .. "\n:= " .. aLine)
+      aLine = string.sub(aLine, 1, bp:GetView().Width)
+      table.insert(lines, aLine)
     end
   end
 
@@ -362,6 +364,7 @@ function CHXListTemplates(bp)
   -- TODO: Select between vertical or horizontal panel
   local newBP = bp:HSplitBuf(newBuf)
   newBuf:SetOption("softwrap", "false")
+  newBuf:SetOption("filetype", "CHXText")
 
   micro.InfoBar():Message("Templates for \"" .. filetype .. "\"")
   return true

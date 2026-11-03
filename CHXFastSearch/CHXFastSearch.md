@@ -9,7 +9,7 @@ It provides two lua functions.
 - `lua:CHXFastSearch.CHXNextWord`
   - Search for next ocurrence of the word (or selection) where cursor is at.
 
-> **Note**: This functions change last search made with [Ctrl-F], so
+> 📝 **Note**: This functions change last search made with [Ctrl-F], so
 > [Ctrl-N] and [Ctrl-P] will search for last word used with the scripts.
 
 ## Key Bindings

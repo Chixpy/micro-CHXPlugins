@@ -1,26 +1,17 @@
 {
-    // Templates of CHXTemplates
-    "Templates/*.lua": {
-        "hltaberrors": false,
-        "keepautoindent": true,
-        "rmtrailingws": false,
-        "tabsize": 4,
-        "tabstospaces": false,
-    },
-    "*.snippets": {
-        "hltaberrors": false,
-        "keepautoindent": true,
-        "rmtrailingws": false,
-        "tabsize": 4,
-        "tabstospaces": false,
-    },
     "basename": true,
     "colorcolumn": 79,
     "colorscheme": "CHXDark",
     "diffgutter": true,
-    "divchars": "┆-",
+    "divchars": "┆—",
+    "ft:CHXText": {
+        "comment.type": "{{%s}}",
+        "softwrap": true,
+        "wordwrap": true,
+    },
     "ft:markdown": {
         "rmtrailingws": false,
+        "softwrap": true,
         "wordwrap": true,
     },
     "ft:pascal": {
@@ -38,7 +29,7 @@
     "softwrap": true,
     "wordwrap": false,
     "statusformatl": "┆$(lines)┆$(col)┆$(opt:encoding)┆$(opt:filetype)┆$(CHXStatusExt.GitRelDir)/",
-    "statusformatr": "┆$(CHXStatusExt.FileElapTime)💾",
+    "statusformatr": "┆$(CHXStatusExt.FileElapTime)💾┆",
     "tabmovement": true,
     "tabsize": 2,
     "tabstospaces": true,

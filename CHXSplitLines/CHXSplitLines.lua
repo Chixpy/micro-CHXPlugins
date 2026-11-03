@@ -1,9 +1,13 @@
-VERSION = "1.2.0"
+VERSION = "1.2.1"
 
 local micro = import("micro")
 local Config = import("micro/config")
 local Buffer = import("micro/buffer")
 local Util = import("micro/util")
+
+-- For easy modification without searching the file
+-- This is wrong, see GetIndentAndContent function, but in this case works.
+local EmptyLineRegExp = "^[  \t]*$"
 
 function init()
   Config.TryBindKey("Alt-s", "lua:CHXSplitLines.CHXSplitLines", false)
@@ -44,12 +48,36 @@ local function UTF8ToRunes(str)
   return runes
 end
 
+local function GetIndentAndContent(textLine)
+-- lua regexp is very limited. Trying to get space, tab and &nbsp; is not
+-- possible AFAIK with (or other variations):
+--   local indent, content = textLine:match("^((?:\xC2\xA0| |\t)*)(.*)$")
+-- Using "^([\xC2\xA0 \t]*)(.*)$" will break º ª · ¬ and other characters
+  local runes = UTF8ToRunes(textLine)
+  local indentRunes = {}
+  local contentRunes = {}
+  local isIndent = true
+  local nbspChar = string.char(194, 160) -- NBSP
+
+  for _, rune in ipairs(runes) do
+    if isIndent and (rune == " " or rune == "\t" or rune == "\x00\xA0"
+    or rune == nbspChar) then
+      table.insert(indentRunes, rune)
+    else
+      isIndent = false
+      table.insert(contentRunes, rune)
+    end
+  end
+
+  return table.concat(indentRunes, ""), table.concat(contentRunes, "")
+end
+
 local function WrapText(oldText, limit)
   local newText = {}
 
   for textLine in string.gmatch(oldText .. "\n", "(.-)\r?\n") do
     -- Get initial indentation and actual right limit
-    local indent, content = textLine:match("^(%s*)(.*)$")
+    local indent, content = GetIndentAndContent(textLine)
     local indentRunes = UTF8ToRunes(indent)
     local indentLen = #indentRunes
     local actualLimit = limit - indentLen
@@ -130,7 +158,7 @@ local function JustParagraph(oldParagraph, limit, jSingleLine)
       -- Last line kept as is.
       table.insert(justifiedLines, line)
     else
-      local indent, content = line:match("^(%s*)(.*)$")
+      local indent, content = GetIndentAndContent(line)
       if not content then
         -- Empty line... must not happen but keep as is
         table.insert(justifiedLines, line)
@@ -187,9 +215,8 @@ local function JustParagraph(oldParagraph, limit, jSingleLine)
 end
 
 function CHXNBSP(bp)
-  -- I don't know how to dereference bp.Cursor.Loc
-  -- bp.Buf:Insert(bp.Cursor.Loc, "\xC2\xA0")
-  bp.Buf:Insert(Buffer.Loc(bp.Cursor.X, bp.Cursor.Y), Util.RuneStr(0x00A0))
+  bp:DoRuneInsert(0x00A0)
+  return true
 end
 
 function CHXSplitLines(bp)
@@ -213,7 +240,7 @@ function CHXSplitLines(bp)
     -- Processing lines in inverted orded (original line numbers don't change)
     for lineNum = endLine, startLine, -1 do
       local oldText = buf:Line(lineNum)
-      local indent, newText = oldText:match("^(%s*)(.*)$")
+      local indent, newText = GetIndentAndContent(oldText)
       -- Removing repeated whitespaces in content only
       newText = indent .. string.gsub(newText, "%s+", " ")
 
@@ -227,6 +254,8 @@ function CHXSplitLines(bp)
   if c:HasSelection() then
     c:ResetSelection() -- Initial selection is restored on Undo
   end
+
+  return true
 end
 
 function CHXSplitLinesAt(bp)
@@ -257,6 +286,7 @@ function CHXSplitLinesAt(bp)
 
     local newText = Util.String(c:GetSelection())
     newText = string.gsub(newText, escResp, resp .. "\n")
+    -- This keeps lines with no break spaces
     newText = string.gsub(newText, "^%s+\n", "\n")
 
     buf:Replace(textStart, textEnd, newText)
@@ -285,7 +315,7 @@ function CHXJustifyLine(bp)
     oldText = buf:Line(endLine)
 
     -- Getting indent
-    local indent, newText = oldText:match("^(%s*)(.*)$")
+    local indent, newText = GetIndentAndContent(oldText)
     -- Removing repeated whitespaces in content only
     newText = indent .. string.gsub(newText, "%s+", " ")
     newText = JustParagraph(newText, limit, true)
@@ -300,6 +330,8 @@ function CHXJustifyLine(bp)
   if c:HasSelection() then
     c:ResetSelection() -- Initial selection is restored on Undo
   end
+
+  return true
 end
 
 function CHXJustifyParagraph(bp)
@@ -320,13 +352,13 @@ function CHXJustifyParagraph(bp)
 
   -- Searching the first line of first paragraph
   while (startLine > 0)
-  and (not buf:Line(startLine - 1):match("^%s*$")) do
+  and (not buf:Line(startLine - 1):match(EmptyLineRegExp)) do
     startLine = startLine - 1
   end
 
   -- Searching the last line of last paragraph
   while (endLine < buf:LinesNum() - 2)
-  and (not buf:Line(endLine + 1):match("^%s*$")) do
+  and (not buf:Line(endLine + 1):match(EmptyLineRegExp)) do
     endLine = endLine + 1
   end
 
@@ -335,7 +367,7 @@ function CHXJustifyParagraph(bp)
   while (currLine >= startLine) do
     -- Serching first line of last paragraph
     while currLine > startLine
-    and (not buf:Line(currLine - 1):match("^%s*$")) do
+    and (not buf:Line(currLine - 1):match(EmptyLineRegExp)) do
       currLine = currLine - 1
     end
 
@@ -346,7 +378,7 @@ function CHXJustifyParagraph(bp)
     end
 
     -- Getting indent
-    local indent, newText = oldParagraph:match("^(%s*)(.*)$")
+    local indent, newText = GetIndentAndContent(oldParagraph)
     -- Removing repeated whitespaces in content only
     newText = indent .. string.gsub(newText, "%s+", " ")
     newText = JustParagraph(newText, limit, false)
@@ -360,10 +392,12 @@ function CHXJustifyParagraph(bp)
     repeat
       currLine = currLine - 1
     until (currLine <= startLine)
-    or (not buf:Line(currLine):match("^%s*$"))
+    or (not buf:Line(currLine):match(EmptyLineRegExp))
     endLine = currLine
   end
   if c:HasSelection() then
     c:ResetSelection() -- Initial selection is restored on Undo
   end
+
+  return true
 end;

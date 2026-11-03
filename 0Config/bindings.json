@@ -3,16 +3,26 @@
   //   "Alt-Shift-<Key>", at least, doesn't work for me
   //   They must be: "Alt-<CapKey>" althought is less clear
 
+  // Wrap text on panel
   "Alt-w": "command:togglelocal softwrap",
   "Alt-W": "command:togglelocal wordwrap",
 
+  // Paragraph indentation without going to the start of the line
   "Alt-z": "IndentSelection|IndentLine",
 
+  // CHXStatusExt extra functions
+  "Alt-D": "lua:CHXStatusExt.CHXInsertDate",
+  "Alt-H": "lua:CHXStatusExt.CHXInsertTime",
+  "Alt-F": "lua:CHXStatusExt.CHXInsertPath",
+
+  // CHXFPCCheck
   "Alt-P": "lua:CHXFPCCheck.CHXFPCCheck",
 
+  // CHXFastSearch
   "Alt-l": "lua:CHXFastSearch.CHXNextWord",
   "Alt-k": "lua:CHXFastSearch.CHXPrevWord",
 
+  // CHXSplitLines
   "Alt-s": "lua:CHXSplitLines.CHXSplitLines",
   "Alt-a": "lua:CHXSplitLines.CHXSplitLinesAt",
   "Alt-S": "lua:CHXSplitLines.CHXJustifyLine",
@@ -20,6 +30,8 @@
   // "\x1b " = Alt-Space in my terminal
   "\x1b ": "lua:CHXSplitLines.CHXNBSP",
 
+  // CHXTemplates
   "Alt-C": "lua:CHXTemplates.CHXInsTemp",
   "Alt-N": "lua:CHXTemplates.CHXNextPH",
+  "Shift-F1": "lua:CHXTemplates.CHXListTemplates",
 }

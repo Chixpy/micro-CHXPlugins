@@ -13,7 +13,7 @@ function init()
 end
 
 function jumptagCommand(bp) -- bp BufPane
-		local filename = bp.Buf.Path
+		local filename = bp.Buf.AbsPath
 
 		-- CHX added "cut -f1,4-" to show only tag and line number
 		local cmd = string.format("bash -c \"ctags -f - --fields=n '%s'| cut -f1,4- |fzf --layout=reverse|tr ':' '\n'|tail -1\"", filename)

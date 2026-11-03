@@ -60,7 +60,8 @@ placeholder is repeated.
 - Template  file  format  is  actually lua  code  returning  a  table/map  with
   multiline strings. No parse  is needed this way but  it's format can be  more
   confusing.
-- Non alphanumeric template keywords are limited to one character.
+- Non alphanumeric template keywords are limited to one character or must  have
+  to be selected before.
 - **Remember** to remove multicursors with `Alt-c`.
 
 ## Some improvements
@@ -75,11 +76,13 @@ placeholder is repeated.
 - Other little details derived from string handling without UTF8 runes in  mind
   wich causes problems in `snippets`.
 - Jumping to  placeholder is  done in numeric  order and  ids can skip  numbers
-  (so, you don't need to change al numbers if a placeholder is deleted and  can
+  (so, you don't need to change all numbers if a placeholder is deleted and  can
   intentionally skip them to let to add more between them).
 - Althought it is in  downsides, template file format  is actually code so  you
-  can actually do magic with templates like creating a case with any number  of
-  options dinamically.
+  can actually do magic with templates  like creating a `case` with any  number
+  of options dinamically.
+- `CHXListTemplates`  opens  a  new  buffer  with  the  list  of  keywords  for
+  templates and a little previsualization.
 
 ## Things I will not fix. Call it bugs
 
@@ -87,8 +90,7 @@ placeholder is repeated.
   - Only  first  default text  found  will be  used,  other different  text  on
     placeholders with same id number will be ignored.
   - If the first  appareance of a placeholder  has not a  default text and  any
-    other set  it, it  will not  update  firsts ones  and later  will have  the
-    default text. It's not a recursive algorithm.
+    other placeholder sets  it, it will  not update first  ones and later  will
+    have the default text. It doesn't have a recursive algorithm.
   - If, by edition, a placeholder overlaps any additional cursor, they can  not
-    be separated again. It add complexity to algorithm for such rare case. 
-  
+    be separated again. It adds complexity to algorithm for such rare case. 

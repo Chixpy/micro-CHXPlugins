@@ -2,6 +2,7 @@ VERSION = "1.0.0"
 
 local micro = import("micro")
 local Config = import("micro/config")
+local Buffer = import("micro/buffer")
 local Util = import("micro/util")
 local FilePath = import("filepath")
 local GoOS = import("os")
@@ -11,6 +12,14 @@ local GitRootCache = {} -- Root path of git files
 local ModifCache = {} -- Last save time
 
 function init()
+  -- Functions to write info in current buffer as an extra
+  Config.TryBindKey("Alt-D", "lua:CHXStatusExt.CHXInsertDate", false)
+  Config.MakeCommand("CHXInsertDate", CHXInsertDate, Config.NoComplete)
+  Config.TryBindKey("Alt-H", "lua:CHXStatusExt.CHXInsertTime", false)
+  Config.MakeCommand("CHXInsertTime", CHXInsertTime, Config.NoComplete)
+  Config.TryBindKey("Alt-F", "lua:CHXStatusExt.CHXInsertPath", false)
+  Config.MakeCommand("CHXInsertPath", CHXInsertPath, Config.NoComplete)
+
   micro.SetStatusInfoFn("CHXStatusExt.AbsPath")
   --< Absolute full file path
 
@@ -44,8 +53,8 @@ end
 
 function onBufferClose(buf)
   -- Liberando cache de directorio base de git
-  if GitRootCache[buf] ~= nil then
-    GitRootCache[buf] = nil
+  if GitRootCache[buf.AbsPath] ~= nil then
+    GitRootCache[buf.AbsPath] = nil
   end
 end
 
@@ -60,7 +69,6 @@ end
 local function FindGitRoot(dir)
   while dir ~= "" and dir ~= FilePath.Separator do
     local GitDir = FilePath.Join(dir, ".git")
-
     local Info, err = GoOS.Stat(GitDir)
     if err == nil then
       return dir
@@ -80,7 +88,7 @@ function GitRelDir(buf)
     return "[No file] "
   end
 
-  local key = buf:GetName()
+  local key = buf.AbsPath
   local FileDir = FilePath.Dir(buf.AbsPath)
   local RootDir = GitRootCache[key]
 
@@ -137,7 +145,7 @@ function Time(buf)
 end
 
 function Date(buf)
-  return time.Now():Format("02/01/2006")
+  return time.Now():Format("2006/01/02")
 end
 
 local function CacheModTime(buf)
@@ -187,4 +195,60 @@ function FileElapTime(buf)
   local seconds = totalSeconds % 60
 
   return string.format("%02d:%02d", minutes, seconds)
+end
+
+function CHXInsertDate(bp)
+  local count = bp.Buf:NumCursors()
+
+  for i = 0, count - 1 do
+    local aCursor = bp.Buf:GetCursor(i)
+    if aCursor then
+      if aCursor:HasSelection() then
+          aCursor:DeleteSelection()
+          aCursor:ResetSelection()
+      end
+
+    bp.Buf:Insert(Buffer.Loc(aCursor.X, aCursor.Y),
+      time.Now():Format("2006/01/02"))
+    end
+  end
+
+  return true
+end
+
+function CHXInsertTime(bp)
+  local count = bp.Buf:NumCursors()
+
+  for i = 0, count - 1 do
+    local aCursor = bp.Buf:GetCursor(i)
+    if aCursor then
+      if aCursor:HasSelection() then
+          aCursor:DeleteSelection()
+          aCursor:ResetSelection()
+      end
+
+    bp.Buf:Insert(Buffer.Loc(aCursor.X, aCursor.Y),
+      time.Now():Format("15:04:05"))
+    end
+  end
+
+  return true
+end
+
+function CHXInsertPath(bp)
+  local count = bp.Buf:NumCursors()
+
+  for i = 0, count - 1 do
+    local aCursor = bp.Buf:GetCursor(i)
+    if aCursor then
+      if aCursor:HasSelection() then
+          aCursor:DeleteSelection()
+          aCursor:ResetSelection()
+      end
+
+      bp.Buf:Insert(Buffer.Loc(aCursor.X, aCursor.Y), bp.Buf.AbsPath)
+    end
+  end
+
+  return true
 end
