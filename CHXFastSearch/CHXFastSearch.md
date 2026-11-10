@@ -27,3 +27,7 @@ You can easily modify that in your `bindings.json` file by adding:
     "Alt-l": "lua:CHXFastSearch.CHXNextWord",
 }
 ```
+
+## Possible improvements
+
+- Don't work with some characters: 𝛼, 𝛽, 𝛾 (italic greek letters)

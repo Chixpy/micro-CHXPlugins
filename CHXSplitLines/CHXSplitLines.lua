@@ -41,6 +41,8 @@ end
 
 local function UTF8ToRunes(str)
 -- Convert a string to UTF8 runes to deal with non ASCII characters.
+-- TODO: This function is repeated in other CHX plugins, maybe it will be put
+--   in .config/micro/init.lua to be global.
   local runes = {}
   for char in str:gmatch("([%z\1-\127\194-\244][\128-\191]*)") do
     table.insert(runes, char)

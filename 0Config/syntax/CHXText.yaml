@@ -20,17 +20,16 @@ rules:
             # &nbsp; visible
             - underlined: " "
             # Additional data: Links, footnotes text, language, etc.
-            - comment: "(?smi)\\{\\{.*\\}\\}"
+            - comment: "(?smi)\\{\\{.+?\\}\\}"
     # Code: Prefered inline
     - special:
         start: "\\[\\["
         end: "\\]\\]"
         rules:
-            - underlined: " "
             # &nbsp; visible
             - underlined: " "
             # Additional data: Links, footnotes text, language, etc.
-            - comment: "(?smi)\\{\\{.*\\}\\}"
+            - comment: "(?smi)\\{\\{.+?\\}\\}"
     # Matematical operation
     - type:
         start: "\\$\\$"
@@ -62,16 +61,16 @@ rules:
   # Inline
 
     # Additional data: Links, footnotes text, language, etc.
-    - comment: "(?smi)\\{\\{.*\\}\\}"
+    - comment: "(?smi)\\{\\{.+?\\}\\}"
 
     # Strike
-    - underline: "(?smi)~~.*~~"
+    - underline: "(?smi)~~.+?~~"
     # Underline
-    - underline: "(?smi)__.*__"
+    - underline: "(?smi)__.+?__"
     # Italic
-    - italic: "(?smi)//.*//"
+    - italic: "(?smi)//.+?//"
     # Bold
-    - bold: "(?smi)\\*\\*.*\\*\\*"
+    - bold: "(?smi)\\*\\*.+?\\*\\*"
 
     # Todo
     # What means "FIX"?: ¿Is already fixed or must be fixed?

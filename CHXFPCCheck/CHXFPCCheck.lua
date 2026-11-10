@@ -188,8 +188,8 @@ function FPCParseExit(output)
       elseif string.find(msgLow, "warning", 1, true) then
         MsgType = buffer.MTWarning
 
-      -- else if string.find(msgLow, "fatal", 1, true)
-      -- or string.find(msgLow, "error", 1, true) then
+      -- else if string.find(msgLow, "hint", 1, true)
+      -- or string.find(msgLow, "info", 1, true) then
       --   MsgType = buffer.MTInfo
       end
 

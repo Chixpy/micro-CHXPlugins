@@ -1,3 +1,10 @@
+## 2026-11-10 19:15
+
+- `CHXTemplates`:
+  - Ops. I didn't add original template files.
+  - Reorganizing source and renaming functions, because...
+  - ...added a second  set of templates  for global use  For example to  insert
+    symbols, licenses, and other magic.
 ## 2026-11-03 17:55
 
 - Updating `README.md` and some others, to previous commit changes...

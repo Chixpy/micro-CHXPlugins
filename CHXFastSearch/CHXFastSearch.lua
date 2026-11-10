@@ -1,4 +1,6 @@
-VERSION = "1.0.0"
+VERSION = "1.1.0"
+
+-- TODO: Don't work with some characters, try: 𝛾 𝛾   𝛾  𝛾
 
 local micro = import("micro")
 local Config = import("micro/config")

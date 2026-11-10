@@ -1,11 +1,11 @@
 [{
   "Name": "CHXTemplates",
-  "Description": "Plugin to insert text templates",
+  "Description": "Plugin to insert text templates or symbols",
   "Website": "https://github.com/Chixpy/micro-CHXPlugins/CHXTemplates",
   "Tags": ["code", "template"],
   "Versions": [
     {
-      "Version": "1.0.0",
+      "Version": "1.1.0",
       "Url": "",
       "Require": {
         "micro": ">=2.0.0"

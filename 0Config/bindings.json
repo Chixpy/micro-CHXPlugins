@@ -31,7 +31,9 @@
   "\x1b ": "lua:CHXSplitLines.CHXNBSP",
 
   // CHXTemplates
-  "Alt-C": "lua:CHXTemplates.CHXInsTemp",
+  "Alt-C": "lua:CHXTemplates.CHXTypeTemplate|lua:CHXTemplates.CHXGlobalTemplate",
+  "Alt-G": "lua:CHXTemplates.CHXGlobalTemplate|lua:CHXTemplates.CHXTypeTemplate",
   "Alt-N": "lua:CHXTemplates.CHXNextPH",
-  "Shift-F1": "lua:CHXTemplates.CHXListTemplates",
+  "Shift-F1": "lua:CHXTemplates.CHXListTypeTemplates",
+  "Ctrl-F1": "lua:CHXTemplates.CHXListGlobalTemplates",
 }
