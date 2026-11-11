@@ -1,5 +1,2 @@
-  - Fixing `.md` lists...
-  - Adding `0Config/syntax/PascalSyntax.pas` as an example.
-  - Added  `git_commit.sh`,   script  for   creating   commits  and   changelog
-    management.  Its an  update  of a  previous  private  one and  changed  how
-    changelogs are stored.
+- Re-fixing MarkDown files... again,  removing _&nbsp;_ used for justifying  in
+  raw text. Breaks a lot of things.
