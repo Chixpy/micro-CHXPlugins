@@ -4,20 +4,21 @@
 
 It provides two lua functions.
 
-- `lua:CHXFastSearch.CHXPrevWord`
-  - Search for previous ocurrence of the word (or selection) where cursor is at.
-- `lua:CHXFastSearch.CHXNextWord`
-  - Search for next ocurrence of the word (or selection) where cursor is at.
+  - `lua:CHXFastSearch.CHXPrevWord`
+    - Search for previous ocurrence of the word (or selection) where cursor  is
+      at.
+  - `lua:CHXFastSearch.CHXNextWord`
+    - Search for next ocurrence of the word (or selection) where cursor is at.
 
-> 📝 **Note**: This functions change last search made with [Ctrl-F], so
-> [Ctrl-N] and [Ctrl-P] will search for last word used with the scripts.
+> 📝 **Note**:  This  functions  change  last  search  made  with  [Ctrl-F], so
+> [Ctrl-N] and [Ctrl-P] will search for last word used with the scripts.
 
 ## Key Bindings
 
 Default key bindings, if no already set:
 
-- `Alt-k`: CHXPrevWord
-- `Alt-l`: CHXNextWord
+  - `Alt-k`: CHXPrevWord
+  - `Alt-l`: CHXNextWord
 
 You can easily modify that in your `bindings.json` file by adding:
 
@@ -30,4 +31,4 @@ You can easily modify that in your `bindings.json` file by adding:
 
 ## Possible improvements
 
-- Don't work with some characters: 𝛼, 𝛽, 𝛾 (italic greek letters)
+  - It don't work with some characters: 𝛼, 𝛽, 𝛾 (italic greek letters)

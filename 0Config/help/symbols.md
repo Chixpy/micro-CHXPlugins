@@ -56,7 +56,7 @@ Tematic list of symbols from `jlabbrev` plugin to copy-paste and some other.
 
 ## Misc not julia
 
-  🕒 💾 ✅ ❌ 📝 💡 ⚠️ ⚙️ 📦
+  🕒 💾 ✅ ❌ 📝 💡 ⚠️ ⚙️ 📦 ✨ 📥 🔍 🗜️
 
 ## Accents
 
