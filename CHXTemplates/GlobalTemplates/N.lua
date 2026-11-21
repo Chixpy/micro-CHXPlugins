@@ -15,6 +15,8 @@ local templates = {
 
 ["natural"] = "♮",
 
+["nbsp"] = " ",
+
 ["nBumpeq"] = "≎̸",
 
 ["nbumpeq"] = "≏̸",

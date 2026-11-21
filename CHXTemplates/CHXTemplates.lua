@@ -1,4 +1,4 @@
-VERSION = "1.1.0"
+VERSION = "1.2.0"
 
 local micro = import("micro")
 local Config = import("micro/config")
@@ -25,7 +25,7 @@ function init()
   Config.MakeCommand("CHXNextPH", CHXNextPH, Config.NoComplete)
   Config.MakeCommand("CHXListTypeTemplates", CHXListTypeTemplates,
     Config.NoComplete)
-  Config.MakeCommand("CHXListGlobalTemplates", CHXListTypeTemplates,
+  Config.MakeCommand("CHXListGlobalTemplates", CHXListGlobalTemplates,
     Config.NoComplete)
 
   Config.TryBindKey("Alt-C",
@@ -403,7 +403,7 @@ function CHXListTypeTemplates(bp)
 
   local lines = {}
   table.insert(lines,
-    "========== Templates for: " .. filetype .. " ==========")
+    "============ Templates for: " .. filetype .. " ============")
   -- table.insert(lines, "") -- added later
 
   -- Getting biggest key size
@@ -420,7 +420,7 @@ function CHXListTypeTemplates(bp)
   for k, v in pairs(templates) do
     if (not v) or (v == "") then
         table.insert(lines, "")
-        table.insert(lines, "======== " .. k .. " ========")
+        table.insert(lines, "========== " .. k .. " ==========")
         table.insert(lines, "")
     else
       local aLine = v:gsub("%s+", " ")
@@ -459,12 +459,86 @@ function CHXListTypeTemplates(bp)
 end
 
 function CHXListGlobalTemplates(bp)
+  local keyword = GetKeyword(bp)
+  if keyword == "" then
+    micro.InfoBar():Error("No keyword")
+    return false
+  end
 
---[[
-  Aquí habrá que preguntar por qué letra empieza o mostrar el listado de
-  archivos...
-]]--
-  micro.InfoBar():Error("To be implemented")
+  local aFileName = GetGlobalFilename(keyword)
+  if aFileName  == "" then
+    micro.InfoBar():Error('"' .. aFilename .. '" not found.')
+    return false
+  end
+
+  local templates = LoadTemplatesFile(RTCHXGlobalTemplates, aFileName)
+  if not templates then
+    micro.InfoBar():Error("No global templates beginning with \"" .. keyword
+      .. "\"")
+    return true
+  end
+
+  -- Getting keys wich begin with keyword
+  local keys = {}
+  for k, v in pairs(templates) do
+    if (v) and (v ~= "") and (k:sub(1, #keyword) == keyword) then
+      table.insert(keys, k)
+    end
+  end
+
+  if #keys == 0 then
+    micro.InfoBar():Error("No global templates beginning with \"" .. keyword
+      .. "\"")
+    return true
+  end
+
+  table.sort(keys)
+
+  local lines = {}
+  table.insert(lines,
+    "============ Global templates beginning with \"" .. keyword
+    .. "\" ============")
+  -- table.insert(lines, "") -- added later
+
+  -- Getting biggest key size
+  local longestKey = 0
+  for _, k in ipairs(keys) do
+    local n = Util.CharacterCountInString(k)
+    if n > longestKey then
+      longestKey = n
+    end
+  end
+
+  for _, k in ipairs(keys) do
+    local aLine = templates[k]:gsub("%s+", " ")
+    aLine = aLine:gsub("{{(%d+)[^}]*}}", "$%1")
+
+    aLine = string.format("  %-" .. longestKey .."s -> %s", k, aLine)
+
+    aLine = string.sub(aLine, 1, bp:GetView().Width)
+    if #lines == 1 then -- First title separation
+      aLine = "\n" .. aLine
+    end
+    table.insert(lines, aLine)
+  end
+
+  local content = table.concat(lines, "\n")
+
+  -- Opening a help panel
+  local newBuf = Buffer.NewBuffer(content, '"'.. keyword .. '" templates')
+
+  -- newBuf.Type = Buffer.BTInfo (= 5, not a Buftype) doesn't work
+  newBuf.Type.Kind = 5
+  newBuf.Type.Readonly = true
+  newBuf.Type.Scratch = true
+  newBuf.Type.Syntax = true
+
+  -- TODO: Select between vertical or horizontal panel
+  local newBP = bp:HSplitBuf(newBuf)
+  newBuf:SetOption("softwrap", "false")
+  newBuf:SetOption("filetype", "CHXText")
+
+  micro.InfoBar():Message("Templates beginning with \"" .. keyword .. "\"")
   return true
 end
 
